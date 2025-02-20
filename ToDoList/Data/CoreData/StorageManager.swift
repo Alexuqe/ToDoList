@@ -62,7 +62,7 @@ final class StorageManager {
 
     //MARK: - CRUD
 
-    func create(_ title: String, with details: String, completion: (TasksList) -> Void) {
+    func create(_ title: String, with details: String, completion: @escaping (TasksList) -> Void) {
         let task = TasksList(context: viewContext)
         task.title = title
         task.details = details
@@ -72,9 +72,10 @@ final class StorageManager {
         saveContext()
     }
 
-    func updateTask(task: TasksList, title: String, details: String) {
+    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (TasksList) -> Void) {
         task.title = title
         task.details = details
+        completion(task)
         saveContext()
     }
 

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskListViewProtocol: AnyObject {
+    func showTasks(tasks: [TasksList])
+}
+
 final class TaskListViewController: UITableViewController {
 
     override func viewDidLoad() {

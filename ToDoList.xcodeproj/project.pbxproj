@@ -17,6 +17,10 @@
 		CE2E2ADF2D6789F50006B305 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2ADE2D6789F00006B305 /* StorageManager.swift */; };
 		CE2E2AE72D678BB00006B305 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2AE62D678B980006B305 /* Task.swift */; };
 		CE2E2B012D6796240006B305 /* APIToDoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B002D67960B0006B305 /* APIToDoes.swift */; };
+		CE2E2B032D67A96E0006B305 /* TaskListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B022D67A96E0006B305 /* TaskListInteractor.swift */; };
+		CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */; };
+		CE2E2B072D67A9EA0006B305 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */; };
+		CE2E2B0A2D67BCFB0006B305 /* TaskListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		CE2E2ADE2D6789F00006B305 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 1; path = StorageManager.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		CE2E2AE62D678B980006B305 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CE2E2B002D67960B0006B305 /* APIToDoes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIToDoes.swift; sourceTree = "<group>"; };
+		CE2E2B022D67A96E0006B305 /* TaskListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListInteractor.swift; sourceTree = "<group>"; };
+		CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
+		CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
+		CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -184,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				CE2E2AC92D6786720006B305 /* TaskListViewController.swift */,
+				CE2E2B082D67BCC80006B305 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +200,7 @@
 		CE2E2AE22D678A1D0006B305 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E2B022D67A96E0006B305 /* TaskListInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -198,6 +208,7 @@
 		CE2E2AE32D678A2A0006B305 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -213,8 +224,17 @@
 		CE2E2AE52D678A3C0006B305 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		CE2E2B082D67BCC80006B305 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,10 +381,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2E2AE72D678BB00006B305 /* Task.swift in Sources */,
+				CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */,
 				CE2E2ACF2D6786720006B305 /* AppDelegate.swift in Sources */,
+				CE2E2B072D67A9EA0006B305 /* TaskListRouter.swift in Sources */,
 				CE2E2B012D6796240006B305 /* APIToDoes.swift in Sources */,
+				CE2E2B032D67A96E0006B305 /* TaskListInteractor.swift in Sources */,
 				CE2E2AD02D6786720006B305 /* SceneDelegate.swift in Sources */,
 				CE2E2ADD2D6789E40006B305 /* NetworkManager.swift in Sources */,
+				CE2E2B0A2D67BCFB0006B305 /* TaskListsCell.swift in Sources */,
 				CE2E2ADF2D6789F50006B305 /* StorageManager.swift in Sources */,
 				CE2E2AD12D6786720006B305 /* TasksList.xcdatamodeld in Sources */,
 				CE2E2AD22D6786720006B305 /* TaskListViewController.swift in Sources */,
