@@ -31,6 +31,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
     private let storageManager = StorageManager.shared
 
     func fetchTask() {
+        print("Fetching tasks...")
         if !UserDefaults.standard.bool(forKey: "ifFirstLaunch") {
             loadTaskFromAPI()
         } else {
@@ -45,9 +46,11 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             guard let self else { return }
             switch result {
                 case .success(let tasks):
-                    storageManager.fetchTasksOnAPI(tasks.todos)
-                    UserDefaults.standard.set(true, forKey: "ifFirstLaunch")
-                    loadTaskFromCoreData()
+                    print("Fetched from API: \(tasks)")
+                    self.storageManager.fetchTasksOnAPI(tasks.todos) { [weak self] in // отладка
+                        self?.loadTaskFromCoreData()
+                    }
+                    UserDefaults.standard.set(true, forKey: "ifFirstLaunch") // отладка
                 case .failure(let error):
                     print(error)
             }
@@ -55,7 +58,8 @@ final class TaskListInteractor: TaskListInteractorProtocol {
     }
 
     func loadTaskFromCoreData() {
-        storageManager.fetchTasks { tasks in
+        storageManager.fetchTasks { [weak self] tasks in
+            guard let self else { return }
             switch tasks {
                 case .success(let task):
                     presenter?.didFetchTasks(tasks: task)

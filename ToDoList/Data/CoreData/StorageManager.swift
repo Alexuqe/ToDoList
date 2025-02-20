@@ -34,7 +34,7 @@ final class StorageManager {
 
     //MARK: - Fetch Store Data
 
-    func fetchTasksOnAPI(_ apiTasks: [APITask]) {
+    func fetchTasksOnAPI(_ apiTasks: [APITask], completion: @escaping () -> Void) {
         viewContext.perform { [weak self] in
             guard let self else { return }
 
@@ -46,17 +46,25 @@ final class StorageManager {
                 taskLists.isCompleted = apiTask.completed
             }
             self.saveContext()
+            completion()
         }
     }
 
-    func fetchTasks(completion: (Result<[TasksList], Error>) -> Void) {
+    func fetchTasks(completion: @escaping (Result<[TasksList], Error>) -> Void) {
         let fetchRequest = TasksList.fetchRequest()
-
-        do {
-            let toDos = try viewContext.fetch(fetchRequest)
-            completion(.success(toDos))
-        } catch {
-            completion(.failure(error))
+        
+        viewContext.perform {
+            do {
+                let toDos = try self.viewContext.fetch(fetchRequest)
+                print("Fetched \(toDos.count) tasks from Core Data") // отладка
+                DispatchQueue.main.async {
+                    completion(.success(toDos))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
         }
     }
 

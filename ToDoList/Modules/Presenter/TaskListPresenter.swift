@@ -49,6 +49,7 @@ class TaskListPresenter: TaskListPresenterProtocol {
 
 extension TaskListPresenter: TaskListInteractorOutputProtocol {
     func didFetchTasks(tasks: [TasksList]) {
+        print("didFetchTasks called with tasks: \(tasks)")
         view?.showTasks(tasks: tasks)
     }
 }
