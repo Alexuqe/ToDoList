@@ -7,17 +7,6 @@
 
 import Foundation
 
-protocol TaskListPresenterProtocol: AnyObject {
-    var view: TaskListViewProtocol? { get set }
-    var interactor: TaskListInteractorProtocol? { get set }
-    var router: TaskListRouterProtocol? { get set }
-
-    func viewDidLoad()
-    func addTask(title: String, details: String)
-    func updateTask(task: TasksList, title: String, details: String)
-    func deleteTask(task: TasksList)
-    func searchTask(title: String)
-}
 
 class TaskListPresenter: TaskListPresenterProtocol {
 
@@ -45,11 +34,18 @@ class TaskListPresenter: TaskListPresenterProtocol {
         interactor?.searchTask(title: title)
     }
 
+    func isCompleted(task: TasksList) {
+        interactor?.isCompleted(task: task)
+    }
+
+    func showTasksDetail(for task: TasksList) {
+        router?.navigateToTaskDetail(with: task)
+    }
+
 }
 
 extension TaskListPresenter: TaskListInteractorOutputProtocol {
     func didFetchTasks(tasks: [TasksList]) {
-        print("didFetchTasks called with tasks: \(tasks)")
         view?.showTasks(tasks: tasks)
     }
 }

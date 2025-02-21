@@ -26,4 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         storageManager.saveContext()
     }
 
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        storageManager.saveContext()
+    }
+
 }

@@ -7,40 +7,33 @@
 
 import UIKit
 
-protocol TaskListViewProtocol: AnyObject {
-    func showTasks(tasks: [TasksList])
-}
 
 final class TaskListViewController: UITableViewController, TaskListViewProtocol {
 
     func showTasks(tasks: [TasksList]) {
-        print("showTasks called with tasks: \(tasks)")
         self.tasks = tasks
         tableView.reloadData()
     }
-
 
     var presenter: TaskListPresenterProtocol?
     private var tasks: [TasksList] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
-
         setupUI()
     }
 
         //MARK: - Setup UI
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .darkBackground
+        tableView.backgroundColor = .darkBackground
         setupNavigationController()
 
+        presenter?.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
     }
-
-
 }
 
     //MARK: - UITableViewDataSource
@@ -51,14 +44,17 @@ extension TaskListViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let task = tasks[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TaskListsCell.identifer, for: indexPath)
+                as? TaskListsCell else { return UITableViewCell()}
 
-        var content = cell.defaultContentConfiguration()
-        content.text = task.title
-        content.secondaryText = task.details
-        cell.contentConfiguration = content
+        let task = tasks[indexPath.row]
+        cell.presenter = presenter
+        cell.setupCell(with: task)
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        120
     }
 
 }
@@ -67,11 +63,13 @@ extension TaskListViewController {
 extension TaskListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let task = tasks[indexPath.row]
+        presenter?.showTasksDetail(for: task)
     }
     
 }
 
-    //MARK: - Setup Navigation COntroller
+    //MARK: - Setup Navigation Controller
 private extension TaskListViewController {
 
     func setupNavigationController() {
@@ -81,6 +79,7 @@ private extension TaskListViewController {
 
         let appearance = UINavigationBarAppearance()
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.backgroundColor = .darkBackground
 
         navigationController?.navigationBar.standardAppearance = appearance

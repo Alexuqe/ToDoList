@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol TaskListRouterProtocol: AnyObject {
-    static func createdModule() -> UITableViewController
-    var viewController: UITableViewController? { get set }
-}
-
 
 final class TaskListRouter: TaskListRouterProtocol {
 
@@ -33,6 +28,13 @@ final class TaskListRouter: TaskListRouterProtocol {
 
         return view
     }
-    
+
+    func navigateToTaskDetail(with task: TasksList) {
+        let detailViewController = DetailViewController()
+        detailViewController.tasks = task
+        viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
+
 
 }
