@@ -27,15 +27,6 @@ enum CheckoutButtonState {
         return config
     }
 
-    var textColor: UIColor {
-        switch self {
-            case .notCompleted:
-                UIColor.white
-            case .completed:
-                UIColor.systemGray4
-        }
-    }
-
     var borderColor: CGColor {
         switch self {
             case .notCompleted:
@@ -56,8 +47,9 @@ enum CheckoutButtonState {
                                            attributes: [.foregroundColor: UIColor.white]))
             case .completed:
                 return (NSAttributedString(string: text,
-                                           attributes:[.strikethroughStyle: NSUnderlineStyle.single.rawValue, .foregroundColor: UIColor.systemGray4]),
-                        NSAttributedString(string: subtext, attributes: [.foregroundColor: UIColor.systemGray4]))
+                                           attributes:[.strikethroughStyle: NSUnderlineStyle.single.rawValue,              .foregroundColor: UIColor.systemGray2]),
+                        NSAttributedString(string: subtext,
+                                           attributes: [.foregroundColor: UIColor.systemGray2]))
             }
         }
 }
@@ -84,7 +76,7 @@ final class TaskListsCell: UITableViewCell {
 
     private lazy var titleTaskLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textColor = .white
         label.numberOfLines = 1
         label.textAlignment = .left
@@ -94,7 +86,7 @@ final class TaskListsCell: UITableViewCell {
 
     private lazy var detailsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.textColor = .white
         label.numberOfLines = 2
         label.textAlignment = .left
@@ -196,7 +188,7 @@ private extension TaskListsCell {
         ])
 
         NSLayoutConstraint.activate([
-            labelsStackView.topAnchor.constraint(equalTo: checkoutButton.topAnchor),
+            labelsStackView.topAnchor.constraint(equalTo: checkoutButton.topAnchor, constant: 3.5),
             labelsStackView.leadingAnchor.constraint(equalTo: checkoutButton.trailingAnchor, constant: 15),
             labelsStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             labelsStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)

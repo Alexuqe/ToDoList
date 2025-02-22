@@ -17,4 +17,5 @@ protocol TaskListPresenterProtocol: AnyObject {
     func searchTask(title: String)
     func isCompleted(task: TasksList)
     func showTasksDetail(for task: TasksList)
+    func showAddTaskScreen()
 }

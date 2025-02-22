@@ -35,6 +35,11 @@ final class TaskListRouter: TaskListRouterProtocol {
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
+    func navigateToAddTask() {
+        let detailViewController = DetailViewController()
+        viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+
 
 
 }

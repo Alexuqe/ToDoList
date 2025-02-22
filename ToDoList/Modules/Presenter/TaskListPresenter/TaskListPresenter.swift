@@ -1,14 +1,12 @@
-//
-//  TaskListPresenter.swift
-//  ToDoList
-//
-//  Created by Sasha on 20.02.25.
-//
+
+
+
+
 
 import Foundation
 
 
-class TaskListPresenter: TaskListPresenterProtocol {
+final class TaskListPresenter: TaskListPresenterProtocol {
 
     var view: TaskListViewProtocol?
     var interactor: TaskListInteractorProtocol?
@@ -40,6 +38,10 @@ class TaskListPresenter: TaskListPresenterProtocol {
 
     func showTasksDetail(for task: TasksList) {
         router?.navigateToTaskDetail(with: task)
+    }
+
+    func showAddTaskScreen() {
+        router?.navigateToAddTask()
     }
 
 }

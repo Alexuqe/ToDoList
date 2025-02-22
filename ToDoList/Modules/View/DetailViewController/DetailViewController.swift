@@ -14,8 +14,8 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = tasks?.title
-        view.backgroundColor = .white
+        setupNavigationController()
+        view.backgroundColor = .darkBackground
     }
 
 }
@@ -30,4 +30,11 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
     
 
+}
+
+extension DetailViewController {
+    func setupNavigationController() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = .goldCheckmark
+    }
 }

@@ -41,7 +41,7 @@ final class StorageManager {
             for apiTask in apiTasks {
                 let taskLists = TasksList(context: self.backgroundViewContext)
                 taskLists.title = apiTask.todo
-                taskLists.details = ""
+                taskLists.details = "Tests text from APITasks"
                 taskLists.date = Date()
                 taskLists.isCompleted = apiTask.completed
             }
@@ -146,7 +146,6 @@ final class StorageManager {
     }
 
     func isCompletedTask(task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void) {
-
         backgroundViewContext.perform {
             task.isCompleted.toggle()
 

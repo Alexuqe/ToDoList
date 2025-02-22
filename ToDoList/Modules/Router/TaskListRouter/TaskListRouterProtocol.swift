@@ -10,5 +10,6 @@ import UIKit
 protocol TaskListRouterProtocol: AnyObject {
     static func createdModule() -> UITableViewController
     func navigateToTaskDetail(with task: TasksList)
+    func navigateToAddTask()
     var viewController: UITableViewController? { get set }
 }
