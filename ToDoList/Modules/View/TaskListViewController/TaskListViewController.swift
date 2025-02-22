@@ -30,6 +30,8 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
         setupNavigationController()
 
         presenter?.viewDidLoad()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
@@ -53,9 +55,9 @@ extension TaskListViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        120
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        120
+//    }
 
 }
 
