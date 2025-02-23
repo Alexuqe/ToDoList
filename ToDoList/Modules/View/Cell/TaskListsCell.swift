@@ -58,9 +58,12 @@ enum CheckoutButtonState {
 
 final class TaskListsCell: UITableViewCell {
 
+    //MARK: Properties
     static let identifer = "TaskListCell"
+    var taskList: TasksList?
+    var presenter: TaskListPresenterProtocol?
 
-        //MARK: UI Components
+    //MARK: Private UI Components
     private lazy var checkoutButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: "checkmark")
@@ -92,13 +95,11 @@ final class TaskListsCell: UITableViewCell {
         return stack
     }()
 
-        //MARK: - Properties
-    var taskList: TasksList?
-    var presenter: TaskListPresenterProtocol?
-
+    //MARK: - Private Properties
     private let labelStyles = LabelStyles.shared
     private var currentState: CheckoutButtonState = .notCompleted
 
+    //MARK: - Override Methods
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -118,7 +119,7 @@ final class TaskListsCell: UITableViewCell {
         setupUI()
     }
 
-        //MARK: - Content Setup
+    //MARK: - Content Setup
     func setupCell(with task: TasksList) {
         self.taskList = task
         let state: CheckoutButtonState = task.isCompleted ? .completed : .notCompleted
@@ -131,16 +132,16 @@ final class TaskListsCell: UITableViewCell {
         updateStateButton(state: state)
     }
 
-        //MARK: - Action
-    @objc private func checkoutButtonTapped() {
-        guard let taskList = taskList else { return }
-        presenter?.isCompleted(task: taskList)
-    }
-
     private func updateStateButton(state: CheckoutButtonState) {
         currentState = state
         checkoutButton.configuration = state.configuration
         checkoutButton.layer.borderColor = state.borderColor
+    }
+
+    //MARK: - Action
+    @objc private func checkoutButtonTapped() {
+        guard let taskList = taskList else { return }
+        presenter?.isCompleted(task: taskList)
     }
 }
 

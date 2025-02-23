@@ -1,9 +1,4 @@
-//
-//  
-//
-//
-//
-//
+
 
 struct APITask: Decodable {
     let id: Int?

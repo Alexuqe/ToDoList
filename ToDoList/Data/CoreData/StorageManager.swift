@@ -1,9 +1,4 @@
-    //
-    //  
-    //
-    //
-    //
-    //
+
 
 
 import CoreData
@@ -41,14 +36,12 @@ final class StorageManager: StorageManagerProtocol {
     }()
 
         //MARK: - Initializer
-
     private init() {
         viewContext = persistentContainer.viewContext
         backgroundViewContext = persistentContainer.newBackgroundContext()
     }
 
         //MARK: - Fetch Store Data
-
     func fetchTasksOnAPI(_ apiTasks: [APITask], completion: @escaping () -> Void) {
         backgroundViewContext.perform {
             for apiTask in apiTasks {
@@ -89,8 +82,7 @@ final class StorageManager: StorageManagerProtocol {
         }
     }
 
-        //MARK: - CRUD
-
+        //MARK: - Operations
     func create(_ title: String, with details: String, completion: @escaping (Result<[TasksList], Error>) -> Void) {
         backgroundViewContext.perform {
 

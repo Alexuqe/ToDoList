@@ -1,15 +1,14 @@
-    //
-    //  ViewController.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 20.02.25.
-    //
+
 
 import UIKit
 
+protocol TaskListViewProtocol: AnyObject {
+    func showTasks(tasks: [TasksList])
+}
 
 final class TaskListViewController: UITableViewController, TaskListViewProtocol {
 
+    //MARK: Private UI Components
     private let searchController: UISearchController = {
         let view = UISearchController(searchResultsController: nil)
         view.searchBar.placeholder = "Поиск"
@@ -18,9 +17,11 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
         return view
     }()
 
+    //MARK: Properties
     var presenter: TaskListPresenterProtocol?
     var tasks: [TasksList] = []
 
+    //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -66,12 +67,15 @@ extension TaskListViewController {
 
     //MARK: - UITableViewDelegate
 extension TaskListViewController {
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    override func tableView(_ tableView: UITableView,
+                            contextMenuConfigurationForRowAt indexPath: IndexPath,
+                            point: CGPoint) -> UIContextMenuConfiguration? {
 
         let task = tasks[indexPath.row]
 
