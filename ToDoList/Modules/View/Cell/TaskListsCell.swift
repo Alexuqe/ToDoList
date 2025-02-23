@@ -1,8 +1,8 @@
     //
-    //  TaskListsCell.swift
-    //  ToDoList
     //
-    //  Created by Sasha on 20.02.25.
+    //
+    //
+    //
     //
 
 import UIKit
@@ -47,18 +47,20 @@ enum CheckoutButtonState {
                                            attributes: [.foregroundColor: UIColor.white]))
             case .completed:
                 return (NSAttributedString(string: text,
-                                           attributes:[.strikethroughStyle: NSUnderlineStyle.single.rawValue,              .foregroundColor: UIColor.systemGray2]),
+                                           attributes:[.strikethroughStyle:
+                                           NSUnderlineStyle.single.rawValue,
+                                           .foregroundColor: UIColor.systemGray2]),
                         NSAttributedString(string: subtext,
                                            attributes: [.foregroundColor: UIColor.systemGray2]))
-            }
         }
+    }
 }
 
 final class TaskListsCell: UITableViewCell {
 
     static let identifer = "TaskListCell"
 
-        //MARK: Private UIOutlets
+        //MARK: UI Components
     private lazy var checkoutButton: UIButton = {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: "checkmark")
@@ -74,35 +76,9 @@ final class TaskListsCell: UITableViewCell {
         return button
     }()
 
-    private lazy var titleTaskLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private lazy var detailsLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .white
-        label.numberOfLines = 2
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        label.textColor = .systemGray4
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var titleTaskLabel: UILabel = labelStyles.titleLabelstyle()
+    private lazy var detailsLabel: UILabel = labelStyles.detailLabelStyle()
+    private lazy var dateLabel: UILabel = labelStyles.dateLabelStyle()
 
     private lazy var labelsStackView: UIStackView = {
         let stack = UIStackView()
@@ -119,6 +95,7 @@ final class TaskListsCell: UITableViewCell {
     var taskList: TasksList?
     var presenter: TaskListPresenterProtocol?
 
+    private let labelStyles = LabelStyles.shared
     private var currentState: CheckoutButtonState = .notCompleted
 
     override func awakeFromNib() {
@@ -129,18 +106,18 @@ final class TaskListsCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    //MARK: - Initializer
+        //MARK: - Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setupUI()
-        }
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
 
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            setupUI()
-        }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupUI()
+    }
 
-    //MARK: Content Setup
+        //MARK: - Content Setup
     func setupCell(with task: TasksList) {
         self.taskList = task
         let state: CheckoutButtonState = task.isCompleted ? .completed : .notCompleted
@@ -153,7 +130,7 @@ final class TaskListsCell: UITableViewCell {
         updateStateButton(state: state)
     }
 
-//MARK: - Action
+        //MARK: - Action
     @objc private func checkoutButtonTapped() {
         guard let taskList = taskList else { return }
         presenter?.isCompleted(task: taskList)
@@ -164,21 +141,19 @@ final class TaskListsCell: UITableViewCell {
         checkoutButton.configuration = state.configuration
         checkoutButton.layer.borderColor = state.borderColor
     }
-
-
 }
 
-//MARK: - Setup UI
+    //MARK: - Setup UI
 private extension TaskListsCell {
 
     func setupUI() {
         backgroundColor = .darkBackground
         addArranges(titleTaskLabel, detailsLabel, dateLabel)
         addSubviews(checkoutButton, labelsStackView)
-
         setupConstraints()
     }
 
+        //MARK: - Constraints
     func setupConstraints() {
         NSLayoutConstraint.activate([
             checkoutButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
@@ -195,6 +170,7 @@ private extension TaskListsCell {
         ])
     }
 
+        //MARK: - UI Helpers
     func addSubviews(_ subviews: UIView...) {
         subviews.forEach { subview in
             contentView.addSubview(subview)
@@ -207,9 +183,4 @@ private extension TaskListsCell {
         }
     }
 
-}
-
-
-#Preview {
-    TaskListsCell()
 }

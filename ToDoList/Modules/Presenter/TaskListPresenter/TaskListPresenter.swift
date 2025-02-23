@@ -26,6 +26,7 @@ final class TaskListPresenter: TaskListPresenterProtocol {
     
     func deleteTask(task: TasksList) {
         interactor?.deleteTask(task: task)
+        interactor?.fetchTask()
     }
     
     func searchTask(title: String) {
@@ -37,11 +38,19 @@ final class TaskListPresenter: TaskListPresenterProtocol {
     }
 
     func showTasksDetail(for task: TasksList) {
-        router?.navigateToTaskDetail(with: task)
+        router?.navigateToTaskDetail(with: task) { [weak self] in
+            self?.viewDidLoad()
+        }
+    }
+
+    func showDetailPreview(task: TasksList) {
+        router?.showDetailPreview(with: task)
     }
 
     func showAddTaskScreen() {
-        router?.navigateToAddTask()
+        router?.navigateToAddTask { [weak self] in
+            self?.viewDidLoad()
+        }
     }
 
 }

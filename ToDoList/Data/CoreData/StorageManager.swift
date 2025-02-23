@@ -1,8 +1,8 @@
     //
-    //  StorageManager.swift
-    //  ToDoList
+    //  
     //
-    //  Created by Sasha on 20.02.25.
+    //
+    //
     //
 
 
@@ -41,7 +41,11 @@ final class StorageManager {
             for apiTask in apiTasks {
                 let taskLists = TasksList(context: self.backgroundViewContext)
                 taskLists.title = apiTask.todo
-                taskLists.details = "Tests text from APITasks"
+                taskLists.details = """
+                                    Tests text from APITasks
+                                    Tests text from APITasks 
+                                    Tests text from APITasks 
+                                    """
                 taskLists.date = Date()
                 taskLists.isCompleted = apiTask.completed
             }

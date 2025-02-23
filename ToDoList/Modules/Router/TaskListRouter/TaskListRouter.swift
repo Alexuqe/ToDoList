@@ -29,15 +29,24 @@ final class TaskListRouter: TaskListRouterProtocol {
         return view
     }
 
-    func navigateToTaskDetail(with task: TasksList) {
-        let detailViewController = DetailViewController()
-        detailViewController.tasks = task
+    func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void) {
+        let detailViewRouter = DetailViewRouter()
+        let detailViewController = detailViewRouter.createDetailModule(with: task, completion: completion)
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
-    func navigateToAddTask() {
-        let detailViewController = DetailViewController()
-        viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+    func navigateToAddTask(completion: @escaping () -> Void) {
+            let detailViewRouter = DetailViewRouter()
+            let detailViewController = detailViewRouter.createDetailModule(
+                completion: completion
+            )
+            viewController?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+
+    func showDetailPreview(with task: TasksList) -> UIViewController {
+        let detailView = TaskContextPreview()
+        detailView.configure(with: task)
+        return detailView
     }
 
 

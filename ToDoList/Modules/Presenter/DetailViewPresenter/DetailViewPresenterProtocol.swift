@@ -10,6 +10,9 @@ protocol DetailViewPresenterProtocol: AnyObject {
     var interactor: DetailViewInteractorProtocol? { get set }
     var router: DetailViewRouterProtocol? { get set }
 
-    func loadTaskDetails(_ task: TasksList)
-    func updateTask(task: TasksList, title: String, details: String)
+    func viewDidLoad()
+    func saveButtonTapped(title: String, details: String)
+    func textFieldDidChange(title: String?, details: String?)
+    func configure(with task: TasksList)
+    func dismiss()
 }

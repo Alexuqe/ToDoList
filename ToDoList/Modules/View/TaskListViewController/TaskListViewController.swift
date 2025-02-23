@@ -10,6 +10,14 @@ import UIKit
 
 final class TaskListViewController: UITableViewController, TaskListViewProtocol {
 
+    private let searchController: UISearchController = {
+        let view = UISearchController(searchResultsController: nil)
+        view.searchBar.placeholder = "Поиск"
+        view.searchBar.searchBarStyle = .default
+        view.obscuresBackgroundDuringPresentation = false
+        return view
+    }()
+
     var presenter: TaskListPresenterProtocol?
     private var tasks: [TasksList] = []
 
@@ -18,29 +26,16 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
         setupUI()
     }
 
-    //MARK: - Methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewDidLoad()
+    }
+
+        //MARK: - Methods
     func showTasks(tasks: [TasksList]) {
         self.tasks = tasks
         tableView.reloadData()
         updateToolBarItems()
-    }
-
-        //MARK: - Setup UI
-    private func setupUI() {
-        setupNavigationController()
-        setupNAvigationToolBar()
-
-        presenter?.viewDidLoad()
-
-        tableView.backgroundColor = .darkBackground
-        tableView.separatorColor = UIColor.gray
-        tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = UITableView.automaticDimension
-
-        tableView.dataSource = self
-        tableView.delegate = self
-
-        tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
     }
 }
 
@@ -72,16 +67,68 @@ extension TaskListViewController {
     //MARK: - UITableViewDelegate
 extension TaskListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         tableView.deselectRow(at: indexPath, animated: true)
-        let task = tasks[indexPath.row]
-        presenter?.showTasksDetail(for: task)
     }
-    
+
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+
+        let task = tasks[indexPath.row]
+
+        let configuration = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: { [weak self] in
+                return self?.presenter?.router?.showDetailPreview(with: task)
+        }) { _ in
+
+            let editAction = UIAction(
+                title: "Редактировать",
+                image: UIImage(systemName: "square.and.pencil")) { [unowned self] _ in
+                presenter?.showTasksDetail(for: task)
+            }
+
+            let deleteAction = UIAction(
+                title: "Удалить",
+                image: UIImage(systemName: "trash"),
+                attributes: .destructive) { [unowned self] _ in
+
+                let deleteTask = tasks.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                updateToolBarItems()
+                presenter?.deleteTask(task: deleteTask)
+            }
+
+            return UIMenu(children: [editAction, deleteAction])
+        }
+
+        return configuration
+    }
+
 }
 
-    //MARK: - Setup Navigation Controller
+    //MARK: - Setup UI
 private extension TaskListViewController {
 
+        //MARK: - Setup UI
+    func setupUI() {
+        setupNavigationController()
+        setupNavigationToolBar()
+        setupSearchController()
+
+        presenter?.viewDidLoad()
+
+        tableView.backgroundColor = .darkBackground
+        tableView.separatorColor = UIColor.gray
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
+
+        tableView.dataSource = self
+        tableView.delegate = self
+
+        tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
+    }
+
+    //MARK: - Navigation Controller
     func setupNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .white
@@ -97,23 +144,51 @@ private extension TaskListViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
 
-    func setupNAvigationToolBar() {
+    func setupSearchController() {
+        navigationItem.searchController = searchController
+        let micImage = UIImage(
+            systemName: "mic.fill")?
+            .withTintColor(.systemGray2,
+            renderingMode: .alwaysOriginal)
+
+        let searchBar = searchController.searchBar
+        searchBar.tintColor = .white
+        searchBar.showsBookmarkButton = true
+        searchBar.setImage(micImage, for: .bookmark, state: .normal)
+
+        let searchTextField = searchBar.searchTextField
+        searchTextField.backgroundColor = .selectedView
+        searchTextField.textColor = .white
+        searchTextField.leftView?.tintColor = .systemGray2
+
+
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.systemGray2]
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: "Поиск",
+            attributes: attributes
+        )
+
+        searchController.searchResultsUpdater = self
+        definesPresentationContext = true
+    }
+
+    func setupNavigationToolBar() {
         navigationController?.isToolbarHidden = false
         navigationController?.toolbar.barStyle = .black
 
-        let taskCountLabel = UILabel()
-        taskCountLabel.text = "\(tasks.count) Задач"
-        taskCountLabel.textColor = .white
+        let taskCountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
         taskCountLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         taskCountLabel.textAlignment = .center
-        taskCountLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        taskCountLabel.text = "\(tasks.count) Задач"
+        taskCountLabel.textColor = .white
 
         let addTaskButton = UIButton(type: .system)
         let configSymbol = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+
         addTaskButton.tintColor = UIColor.goldCheckmark
-        addTaskButton.setImage(
-            UIImage(systemName: "square.and.pencil", withConfiguration: configSymbol),
-            for: .normal)
+        addTaskButton.setImage(UIImage(systemName: "square.and.pencil",
+                                       withConfiguration: configSymbol),
+                                       for: .normal)
 
         addTaskButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
 
@@ -137,4 +212,17 @@ private extension TaskListViewController {
             }
         }
     }
+}
+
+//MARK: UISearchController ResultsUpdating
+extension TaskListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        if searchText.isEmpty {
+            presenter?.viewDidLoad()
+            return
+        }
+        presenter?.searchTask(title: searchText)
+    }
+
 }

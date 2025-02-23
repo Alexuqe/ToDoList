@@ -1,11 +1,15 @@
 //
-//  DetailViewControllerProtocol.swift
-//  ToDoList
+//  
 //
-//  Created by Sasha on 21.02.25.
+//
+//
 //
 
 protocol DetailViewControllerProtocol: AnyObject {
-    func showTaskDetail(task: TasksList)
-    func updateTask()
+    var presenter: DetailViewPresenterProtocol? { get set }
+
+    func displayTaskTitle(title: String)
+    func displayTaskDetail(detail: String)
+    func displayDate(date: String)
+    func enableSaveButton(_ enabled: Bool)
 }
