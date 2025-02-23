@@ -57,7 +57,8 @@ final class DetailViewController: UIViewController {
     @objc private func saveButtonTapped() {
         guard let title = titleTask.text, let details = detailTask.text else { return }
         presenter?.saveButtonTapped(title: title, details: details)
-        presenter?.dismiss()
+//        presenter?.router?.dismiss()
+        navigationController?.popViewController(animated: true)
     }
 
 }

@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailViewRouter: DetailViewRouterProtocol {
     
-    var viewController: UIViewController?
+    var viewController: DetailViewController?
     private var completion: (() -> Void)?
 
     func createDetailModule(with task: TasksList, completion: @escaping () -> Void) -> UIViewController {

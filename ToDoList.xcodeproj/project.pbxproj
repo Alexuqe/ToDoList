@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,6 +21,9 @@
 		CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */; };
 		CE2E2B072D67A9EA0006B305 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */; };
 		CE2E2B0A2D67BCFB0006B305 /* TaskListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */; };
+		CE5449182D6B4A9C001914C4 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */; };
+		CE54491C2D6B4A9C001914C4 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */; };
+		CE54491D2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */; };
 		CE7C06182D68CA2200B5427A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06172D68CA2200B5427A /* DetailViewController.swift */; };
 		CE7C061A2D68CD2800B5427A /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06192D68CD0D00B5427A /* DetailViewInteractor.swift */; };
 		CE7C061C2D68CD3700B5427A /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C061B2D68CD3000B5427A /* DetailViewPresenter.swift */; };
@@ -73,6 +76,9 @@
 		CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
 		CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
 		CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListsCell.swift; sourceTree = "<group>"; };
+		CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
+		CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
+		CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CE7C06172D68CA2200B5427A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CE7C06192D68CD0D00B5427A /* DetailViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInteractor.swift; sourceTree = "<group>"; };
 		CE7C061B2D68CD3000B5427A /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
@@ -88,11 +94,6 @@
 		CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContextPreview.swift; sourceTree = "<group>"; };
 		CE9B56FA2D6A180300977D93 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		CE2E2AA72D6786060006B305 /* ToDoListTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ToDoListTests; sourceTree = "<group>"; };
-		CE2E2AB12D6786060006B305 /* ToDoListUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ToDoListUITests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CE2E2A882D6786020006B305 /* Frameworks */ = {
@@ -123,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				CE2E2ACA2D6786720006B305 /* ToDoList */,
-				CE2E2AA72D6786060006B305 /* ToDoListTests */,
-				CE2E2AB12D6786060006B305 /* ToDoListUITests */,
+				CE5449172D6B4A9C001914C4 /* ToDoListTests */,
+				CE54491B2D6B4A9C001914C4 /* ToDoListUITests */,
 				CE2E2A8C2D6786020006B305 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -271,6 +272,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		CE5449172D6B4A9C001914C4 /* ToDoListTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */,
+			);
+			path = ToDoListTests;
+			sourceTree = "<group>";
+		};
+		CE54491B2D6B4A9C001914C4 /* ToDoListUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */,
+				CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */,
+			);
+			path = ToDoListUITests;
+			sourceTree = "<group>";
+		};
 		CE7C06232D68D0D500B5427A /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,9 +412,6 @@
 			dependencies = (
 				CE2E2AA62D6786060006B305 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				CE2E2AA72D6786060006B305 /* ToDoListTests */,
-			);
 			name = ToDoListTests;
 			packageProductDependencies = (
 			);
@@ -416,9 +431,6 @@
 			);
 			dependencies = (
 				CE2E2AB02D6786060006B305 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				CE2E2AB12D6786060006B305 /* ToDoListUITests */,
 			);
 			name = ToDoListUITests;
 			packageProductDependencies = (
@@ -535,6 +547,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5449182D6B4A9C001914C4 /* ToDoListTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +555,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE54491C2D6B4A9C001914C4 /* ToDoListUITests.swift in Sources */,
+				CE54491D2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
