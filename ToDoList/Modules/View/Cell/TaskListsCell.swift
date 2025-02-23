@@ -67,6 +67,7 @@ final class TaskListsCell: UITableViewCell {
         configuration.baseForegroundColor = .goldCheckmark
 
         let button = UIButton(configuration: configuration)
+        button.accessibilityIdentifier = "checkmarkButton"
         button.layer.cornerRadius = 15
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.systemGray4.cgColor

@@ -13,7 +13,8 @@ final class TaskListInteractor: TaskListInteractorProtocol {
     var presenter: (TaskListInteractorOutputProtocol & TaskListPresenterProtocol)?
 
     private let networkManager = NetworkManager.shared
-    private let storageManager = StorageManager.shared
+//    private let storageManager = StorageManager.shared
+    var storageManager: StorageManagerProtocol = StorageManager.shared
     private let userDefaultsKey = "ifFirstLaunch"
 
     func fetchTask() {

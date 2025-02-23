@@ -19,7 +19,7 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
     }()
 
     var presenter: TaskListPresenterProtocol?
-    private var tasks: [TasksList] = []
+    var tasks: [TasksList] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,6 +176,7 @@ private extension TaskListViewController {
         navigationController?.isToolbarHidden = false
         navigationController?.toolbar.barStyle = .black
 
+
         let taskCountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
         taskCountLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         taskCountLabel.textAlignment = .center
@@ -191,6 +192,7 @@ private extension TaskListViewController {
                                        for: .normal)
 
         addTaskButton.addTarget(self, action: #selector(tapAddButton), for: .touchUpInside)
+        addTaskButton.accessibilityIdentifier = "addTaskButton"
 
         let countLabel = UIBarButtonItem(customView: taskCountLabel)
         let addButton = UIBarButtonItem(customView: addTaskButton)
@@ -199,6 +201,7 @@ private extension TaskListViewController {
         toolbarItems = [flexibleSpace, countLabel, flexibleSpace, addButton]
     }
 
+    //MARK: Actions
     @objc private func tapAddButton() {
         presenter?.showAddTaskScreen()
     }

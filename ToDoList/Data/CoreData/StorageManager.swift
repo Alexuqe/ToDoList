@@ -8,7 +8,20 @@
 
 import CoreData
 
-final class StorageManager {
+
+protocol StorageManagerProtocol {
+    func fetchTasksOnAPI(_ apiTasks: [APITask], completion: @escaping () -> Void)
+    func fetchTasks(completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func create(_ title: String, with details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func delete(_ task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func searchTask(title: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func isCompletedTask(task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void)
+}
+
+
+
+final class StorageManager: StorageManagerProtocol {
 
         //MARK: - Properties
     static let shared = StorageManager()

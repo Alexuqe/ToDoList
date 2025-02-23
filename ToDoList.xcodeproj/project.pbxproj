@@ -21,9 +21,17 @@
 		CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */; };
 		CE2E2B072D67A9EA0006B305 /* TaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */; };
 		CE2E2B0A2D67BCFB0006B305 /* TaskListsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */; };
-		CE5449182D6B4A9C001914C4 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */; };
-		CE54491C2D6B4A9C001914C4 /* ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */; };
 		CE54491D2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */; };
+		CE5449302D6B52BE001914C4 /* TaskListViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449282D6B5003001914C4 /* TaskListViewTests.swift */; };
+		CE5449312D6B52BE001914C4 /* DetailViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449292D6B5029001914C4 /* DetailViewTests.swift */; };
+		CE5449322D6B52BE001914C4 /* TaskListViewRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492E2D6B51AA001914C4 /* TaskListViewRouterTests.swift */; };
+		CE5449332D6B52BE001914C4 /* DetailViewRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492F2D6B51C0001914C4 /* DetailViewRouterTests.swift */; };
+		CE5449342D6B52BE001914C4 /* TaskLIstPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492A2D6B5086001914C4 /* TaskLIstPresenterTests.swift */; };
+		CE5449352D6B52BE001914C4 /* DetailViewPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492B2D6B5099001914C4 /* DetailViewPresenterTests.swift */; };
+		CE5449362D6B52BE001914C4 /* TaskLIstInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492C2D6B50AA001914C4 /* TaskLIstInteractorTests.swift */; };
+		CE5449372D6B52BE001914C4 /* DetailViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492D2D6B50BF001914C4 /* DetailViewInteractorTests.swift */; };
+		CE54493A2D6B6902001914C4 /* TaskListViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449392D6B68F5001914C4 /* TaskListViewUITests.swift */; };
+		CE54493C2D6B6918001914C4 /* DetailViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54493B2D6B690F001914C4 /* DetailViewUITests.swift */; };
 		CE7C06182D68CA2200B5427A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06172D68CA2200B5427A /* DetailViewController.swift */; };
 		CE7C061A2D68CD2800B5427A /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06192D68CD0D00B5427A /* DetailViewInteractor.swift */; };
 		CE7C061C2D68CD3700B5427A /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C061B2D68CD3000B5427A /* DetailViewPresenter.swift */; };
@@ -76,9 +84,17 @@
 		CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
 		CE2E2B062D67A9EA0006B305 /* TaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRouter.swift; sourceTree = "<group>"; };
 		CE2E2B092D67BCFB0006B305 /* TaskListsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListsCell.swift; sourceTree = "<group>"; };
-		CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
-		CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITests.swift; sourceTree = "<group>"; };
 		CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CE5449282D6B5003001914C4 /* TaskListViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewTests.swift; sourceTree = "<group>"; };
+		CE5449292D6B5029001914C4 /* DetailViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewTests.swift; sourceTree = "<group>"; };
+		CE54492A2D6B5086001914C4 /* TaskLIstPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLIstPresenterTests.swift; sourceTree = "<group>"; };
+		CE54492B2D6B5099001914C4 /* DetailViewPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenterTests.swift; sourceTree = "<group>"; };
+		CE54492C2D6B50AA001914C4 /* TaskLIstInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLIstInteractorTests.swift; sourceTree = "<group>"; };
+		CE54492D2D6B50BF001914C4 /* DetailViewInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInteractorTests.swift; sourceTree = "<group>"; };
+		CE54492E2D6B51AA001914C4 /* TaskListViewRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewRouterTests.swift; sourceTree = "<group>"; };
+		CE54492F2D6B51C0001914C4 /* DetailViewRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewRouterTests.swift; sourceTree = "<group>"; };
+		CE5449392D6B68F5001914C4 /* TaskListViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewUITests.swift; sourceTree = "<group>"; };
+		CE54493B2D6B690F001914C4 /* DetailViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewUITests.swift; sourceTree = "<group>"; };
 		CE7C06172D68CA2200B5427A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CE7C06192D68CD0D00B5427A /* DetailViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewInteractor.swift; sourceTree = "<group>"; };
 		CE7C061B2D68CD3000B5427A /* DetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresenter.swift; sourceTree = "<group>"; };
@@ -275,7 +291,10 @@
 		CE5449172D6B4A9C001914C4 /* ToDoListTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE5449162D6B4A9C001914C4 /* ToDoListTests.swift */,
+				CE5449272D6B4FEB001914C4 /* ViewsTests */,
+				CE5449262D6B4F98001914C4 /* RouterTests */,
+				CE5449252D6B4F84001914C4 /* PresenterTests */,
+				CE5449242D6B4F77001914C4 /* InteractorTests */,
 			);
 			path = ToDoListTests;
 			sourceTree = "<group>";
@@ -283,10 +302,55 @@
 		CE54491B2D6B4A9C001914C4 /* ToDoListUITests */ = {
 			isa = PBXGroup;
 			children = (
-				CE5449192D6B4A9C001914C4 /* ToDoListUITests.swift */,
+				CE5449382D6B68CB001914C4 /* ViewUITests */,
 				CE54491A2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift */,
 			);
 			path = ToDoListUITests;
+			sourceTree = "<group>";
+		};
+		CE5449242D6B4F77001914C4 /* InteractorTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE54492C2D6B50AA001914C4 /* TaskLIstInteractorTests.swift */,
+				CE54492D2D6B50BF001914C4 /* DetailViewInteractorTests.swift */,
+			);
+			path = InteractorTests;
+			sourceTree = "<group>";
+		};
+		CE5449252D6B4F84001914C4 /* PresenterTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE54492A2D6B5086001914C4 /* TaskLIstPresenterTests.swift */,
+				CE54492B2D6B5099001914C4 /* DetailViewPresenterTests.swift */,
+			);
+			path = PresenterTests;
+			sourceTree = "<group>";
+		};
+		CE5449262D6B4F98001914C4 /* RouterTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE54492E2D6B51AA001914C4 /* TaskListViewRouterTests.swift */,
+				CE54492F2D6B51C0001914C4 /* DetailViewRouterTests.swift */,
+			);
+			path = RouterTests;
+			sourceTree = "<group>";
+		};
+		CE5449272D6B4FEB001914C4 /* ViewsTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE5449282D6B5003001914C4 /* TaskListViewTests.swift */,
+				CE5449292D6B5029001914C4 /* DetailViewTests.swift */,
+			);
+			path = ViewsTests;
+			sourceTree = "<group>";
+		};
+		CE5449382D6B68CB001914C4 /* ViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE5449392D6B68F5001914C4 /* TaskListViewUITests.swift */,
+				CE54493B2D6B690F001914C4 /* DetailViewUITests.swift */,
+			);
+			path = ViewUITests;
 			sourceTree = "<group>";
 		};
 		CE7C06232D68D0D500B5427A /* DetailViewController */ = {
@@ -547,7 +611,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5449182D6B4A9C001914C4 /* ToDoListTests.swift in Sources */,
+				CE5449302D6B52BE001914C4 /* TaskListViewTests.swift in Sources */,
+				CE5449312D6B52BE001914C4 /* DetailViewTests.swift in Sources */,
+				CE5449322D6B52BE001914C4 /* TaskListViewRouterTests.swift in Sources */,
+				CE5449332D6B52BE001914C4 /* DetailViewRouterTests.swift in Sources */,
+				CE5449342D6B52BE001914C4 /* TaskLIstPresenterTests.swift in Sources */,
+				CE5449352D6B52BE001914C4 /* DetailViewPresenterTests.swift in Sources */,
+				CE5449362D6B52BE001914C4 /* TaskLIstInteractorTests.swift in Sources */,
+				CE5449372D6B52BE001914C4 /* DetailViewInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,8 +626,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE54491C2D6B4A9C001914C4 /* ToDoListUITests.swift in Sources */,
+				CE54493C2D6B6918001914C4 /* DetailViewUITests.swift in Sources */,
 				CE54491D2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift in Sources */,
+				CE54493A2D6B6902001914C4 /* TaskListViewUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,7 +895,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24Q9WM75S6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlexHalushko.ToDoListUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -845,7 +917,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 24Q9WM75S6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlexHalushko.ToDoListUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

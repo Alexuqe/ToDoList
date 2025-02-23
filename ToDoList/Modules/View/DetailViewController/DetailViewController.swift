@@ -16,7 +16,7 @@ final class DetailViewController: UIViewController {
     private let labelStyle = LabelStyles.shared
 
     //MARK: UI Components
-    private lazy var titleTask: UITextField = {
+    lazy var titleTask: UITextField = {
         let view = UITextField()
         view.font = .systemFont(ofSize: 30, weight: .bold)
         view.textColor = .white
@@ -24,13 +24,14 @@ final class DetailViewController: UIViewController {
             string: "Введите заголовок",
             attributes: [.foregroundColor: UIColor.systemGray2])
         view.addTarget(self, action: #selector(titleDidChange), for: .editingChanged)
+        view.accessibilityIdentifier = "titleTextField"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private lazy var dateLabel: UILabel = labelStyle.dateLabelStyle()
 
-    private lazy var detailTask: UITextView = {
+    private lazy var detailTextView: UITextView = {
         let view = UITextView()
         view.font = .systemFont(ofSize: 13, weight: .regular)
         view.textAlignment = .left
@@ -38,10 +39,11 @@ final class DetailViewController: UIViewController {
         view.backgroundColor = .clear
         view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = "detailTextView"
         return view
     }()
 
-    //MARK: Life Cycle
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -49,15 +51,14 @@ final class DetailViewController: UIViewController {
         presenter?.viewDidLoad()
     }
 
-    //MARK: Actions
+    //MARK: - Actions
     @objc private func titleDidChange() {
-        presenter?.textFieldDidChange(title: titleTask.text, details: detailTask.text)
+        presenter?.textFieldDidChange(title: titleTask.text, details: detailTextView.text)
     }
 
     @objc private func saveButtonTapped() {
-        guard let title = titleTask.text, let details = detailTask.text else { return }
+        guard let title = titleTask.text, let details = detailTextView.text else { return }
         presenter?.saveButtonTapped(title: title, details: details)
-//        presenter?.router?.dismiss()
         navigationController?.popViewController(animated: true)
     }
 
@@ -71,7 +72,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
     
     func displayTaskDetail(detail: String) {
-        detailTask.text = detail
+        detailTextView.text = detail
     }
     
     func displayDate(date: String) {
@@ -88,7 +89,7 @@ extension DetailViewController {
 
     func setupUI() {
         setupNavigationController()
-        addSubviews(titleTask, dateLabel, detailTask)
+        addSubviews(titleTask, dateLabel, detailTextView)
         setupConstraints()
     }
 
@@ -124,10 +125,10 @@ extension DetailViewController {
         ])
 
         NSLayoutConstraint.activate([
-            detailTask.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
-            detailTask.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            detailTask.trailingAnchor.constraint(equalTo: titleTask.trailingAnchor),
-            detailTask.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            detailTextView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 10),
+            detailTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            detailTextView.trailingAnchor.constraint(equalTo: titleTask.trailingAnchor),
+            detailTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 
