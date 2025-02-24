@@ -31,11 +31,11 @@
 		CE5449362D6B52BE001914C4 /* TaskLIstInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492C2D6B50AA001914C4 /* TaskLIstInteractorTests.swift */; };
 		CE5449372D6B52BE001914C4 /* DetailViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54492D2D6B50BF001914C4 /* DetailViewInteractorTests.swift */; };
 		CE54493A2D6B6902001914C4 /* TaskListViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5449392D6B68F5001914C4 /* TaskListViewUITests.swift */; };
-		CE54493C2D6B6918001914C4 /* DetailViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54493B2D6B690F001914C4 /* DetailViewUITests.swift */; };
 		CE7C06182D68CA2200B5427A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06172D68CA2200B5427A /* DetailViewController.swift */; };
 		CE7C061A2D68CD2800B5427A /* DetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C06192D68CD0D00B5427A /* DetailViewInteractor.swift */; };
 		CE7C061C2D68CD3700B5427A /* DetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C061B2D68CD3000B5427A /* DetailViewPresenter.swift */; };
 		CE7C061E2D68CD4300B5427A /* DetailViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7C061D2D68CD3C00B5427A /* DetailViewRouter.swift */; };
+		CE8A61952D6CDCE300077BD8 /* DetailViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54493B2D6B690F001914C4 /* DetailViewUITests.swift */; };
 		CE9B56F22D6A12A200977D93 /* TaskContextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */; };
 		CE9B56FB2D6A180D00977D93 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56FA2D6A180300977D93 /* LabelStyles.swift */; };
 /* End PBXBuildFile section */
@@ -530,7 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE54493C2D6B6918001914C4 /* DetailViewUITests.swift in Sources */,
+				CE8A61952D6CDCE300077BD8 /* DetailViewUITests.swift in Sources */,
 				CE54491D2D6B4A9C001914C4 /* ToDoListUITestsLaunchTests.swift in Sources */,
 				CE54493A2D6B6902001914C4 /* TaskListViewUITests.swift in Sources */,
 			);

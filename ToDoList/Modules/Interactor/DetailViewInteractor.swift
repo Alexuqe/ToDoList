@@ -23,9 +23,10 @@ final class DetailViewInteractor: DetailViewInteractorProtocol {
 
         //MARK: - Properties
     var presenter: DetailViewInteractorOutputProtocol?
+    var storageManager: StorageManagerProtocol = StorageManager.shared
 
         //MARK: - Private Properties
-    private let storageManager = StorageManager.shared
+//    private let storageManager = StorageManager.shared
     private var currentTask: TasksList?
 
         //MARK: - Fetch Methods

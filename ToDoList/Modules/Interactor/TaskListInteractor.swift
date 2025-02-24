@@ -25,6 +25,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
 
     //MARK: - Private Properties
     private let networkManager = NetworkManager.shared
+    private let savedNames = APINameTaskStorage.shared
     private let userDefaultsKey = "ifFirstLaunch"
 
     //MARK: - Fetch Methods
@@ -44,7 +45,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             
             switch result {
                 case .success(let tasks):
-                    self.storageManager.fetchTasksOnAPI(tasks.todos) {
+                    self.storageManager.fetchTasksOnAPI(tasks.todos, savedNames.taskTitles) {
                         UserDefaults.standard.set(true, forKey: self.userDefaultsKey)
                         self.loadTaskFromCoreData()
                     }

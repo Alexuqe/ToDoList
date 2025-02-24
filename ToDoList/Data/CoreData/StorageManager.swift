@@ -5,7 +5,7 @@ import CoreData
 
 
 protocol StorageManagerProtocol {
-    func fetchTasksOnAPI(_ apiTasks: [APITask], completion: @escaping () -> Void)
+    func fetchTasksOnAPI(_ apiTasks: [APITask], _ savedNameTask: [String], completion: @escaping () -> Void)
     func fetchTasks(completion: @escaping (Result<[TasksList], Error>) -> Void)
     func create(_ title: String, with details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
     func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
@@ -42,16 +42,12 @@ final class StorageManager: StorageManagerProtocol {
     }
 
         //MARK: - Fetch Store Data
-    func fetchTasksOnAPI(_ apiTasks: [APITask], completion: @escaping () -> Void) {
+    func fetchTasksOnAPI(_ apiTasks: [APITask], _ savedNameTask: [String], completion: @escaping () -> Void) {
         backgroundViewContext.perform {
-            for apiTask in apiTasks {
+            for (index, apiTask) in apiTasks.enumerated() {
                 let taskLists = TasksList(context: self.backgroundViewContext)
-                taskLists.title = apiTask.todo
-                taskLists.details = """
-                                    Tests text from APITasks
-                                    Tests text from APITasks 
-                                    Tests text from APITasks 
-                                    """
+                taskLists.title = savedNameTask[index]
+                taskLists.details = apiTask.todo
                 taskLists.date = Date()
                 taskLists.isCompleted = apiTask.completed
             }

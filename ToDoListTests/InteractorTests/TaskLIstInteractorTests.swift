@@ -54,7 +54,7 @@ class MockStorageManager: StorageManagerProtocol {
     var fetchTasksCalled = false
     var deleteCalled = false
 
-    func fetchTasksOnAPI(_ apiTasks: [ToDoList.APITask], completion: @escaping () -> Void) {
+    func fetchTasksOnAPI(_ apiTasks: [ToDoList.APITask],_ savedNameTask: [String], completion: @escaping () -> Void) {
         fetchTasksCalled = true
         completion()
     }
