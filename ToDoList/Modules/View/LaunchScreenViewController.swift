@@ -1,9 +1,3 @@
-    //
-    //  LaunchScreen.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 24.02.25.
-    //
 
 import UIKit
 
@@ -14,11 +8,14 @@ protocol LaunchScreenProtocols: AnyObject {
 
 final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols {
 
+        //MARK: Properties
     var presenter: LaunchScreenPresenterProtocols?
 
+        //MARK: - Private Properties
     private let launchAnimationDuration: TimeInterval = 3.1
     private let transitionDelay: TimeInterval = 3
 
+        //MARK: - Private UI Components
     private let launchScreenImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage.launchScreen
@@ -28,15 +25,13 @@ final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols 
         return view
     }()
 
-    deinit {
-        print("LaunchScreenViewController is being deinitialized")
-    }
-
+        //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
 
+        //MARK: - Setup UI
     private func setupUI() {
         view.backgroundColor = .darkBackground
         view.addSubview(launchScreenImage)
@@ -44,16 +39,7 @@ final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols 
         animateLaunchScreen()
     }
 
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            launchScreenImage.topAnchor.constraint(equalTo: view.topAnchor),
-            launchScreenImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            launchScreenImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            launchScreenImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-    }
-
-
+        //MARK: - Animation Methods
     func animateLaunchScreen() {
         launchScreenImage.alpha = 0.0
         launchScreenImage.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -64,6 +50,21 @@ final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols 
                 self.transition()
             }
         }
+    }
+
+
+}
+
+    //MARK: - Private Methods
+private extension LaunchScreenViewController {
+
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            launchScreenImage.topAnchor.constraint(equalTo: view.topAnchor),
+            launchScreenImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            launchScreenImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            launchScreenImage.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 
     func animateIn(completion: @escaping () -> Void) {
@@ -88,6 +89,7 @@ final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols 
         }
     }
 
+        //MARK: - Transition Methods
     func transition() {
         UIView.transition(with: self.view.window ?? UIWindow(), duration: 0.3, options: .transitionCrossDissolve, animations: {
             self.presenter?.showTaskListView()
@@ -99,8 +101,4 @@ final class LaunchScreenViewController: UIViewController, LaunchScreenProtocols 
 
 
 
-}
-
-#Preview {
-    LaunchScreenViewController()
 }

@@ -1,9 +1,4 @@
-    //
-    //  LaunchScreenPresenter.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 24.02.25.
-    //
+
 
 protocol LaunchScreenPresenterProtocols: AnyObject {
     func startAnimating()

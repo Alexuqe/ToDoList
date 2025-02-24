@@ -9,7 +9,7 @@ protocol TaskListRouterProtocol: AnyObject {
     static func createdModule() -> UITableViewController
     func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void)
     func navigateToAddTask(completion: @escaping () -> Void)
-    func showDetailPreview(with task: TasksList) -> UIViewController
+    func showDetailPreview(with task: TasksList) -> UIViewController?
 }
 
 final class TaskListRouter: TaskListRouterProtocol {
@@ -51,7 +51,7 @@ final class TaskListRouter: TaskListRouterProtocol {
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
 
-    func showDetailPreview(with task: TasksList) -> UIViewController {
+    func showDetailPreview(with task: TasksList) -> UIViewController? {
         let detailView = TaskContextPreview()
         detailView.configure(with: task)
         return detailView

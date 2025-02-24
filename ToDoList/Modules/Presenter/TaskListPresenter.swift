@@ -1,6 +1,7 @@
 
 
 import Foundation
+import UIKit
 
 protocol TaskListPresenterProtocol: AnyObject {
     var view: TaskListViewProtocol? { get set }
@@ -14,7 +15,7 @@ protocol TaskListPresenterProtocol: AnyObject {
     func searchTask(title: String)
     func isCompleted(task: TasksList)
     func showTasksDetail(for task: TasksList)
-    func showDetailPreview(task: TasksList)
+    func showDetailPreview(with task: TasksList, completion: (UIViewController?) -> Void)
     func showAddTaskScreen()
 }
 
@@ -58,8 +59,9 @@ final class TaskListPresenter: TaskListPresenterProtocol {
         }
     }
 
-    func showDetailPreview(task: TasksList) {
-        router?.showDetailPreview(with: task)
+    func showDetailPreview(with task: TasksList, completion: (UIViewController?) -> Void) {
+       let perview =  router?.showDetailPreview(with: task)
+        completion(perview)
     }
 
     func showAddTaskScreen() {
