@@ -1,22 +1,34 @@
-    //
-    //  TaskListInteractor.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 20.02.25.
-    //
+
 
 import CoreData
 
+protocol TaskListInteractorProtocol: AnyObject {
+    var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)? { get set }
+
+    func fetchTask()
+    func addTask(title: String, details: String)
+    func updateTask(task: TasksList, title: String, details: String)
+    func deleteTask(task: TasksList)
+    func searchTask(title: String)
+    func isCompleted(task: TasksList)
+}
+
+protocol TaskListInteractorOutputProtocol: AnyObject {
+    func didFetchTasks(tasks: [TasksList])
+}
 
 final class TaskListInteractor: TaskListInteractorProtocol {
 
+    //MARK: - Properties
     var presenter: (TaskListInteractorOutputProtocol & TaskListPresenterProtocol)?
-
-    private let networkManager = NetworkManager.shared
-//    private let storageManager = StorageManager.shared
     var storageManager: StorageManagerProtocol = StorageManager.shared
+
+    //MARK: - Private Properties
+    private let networkManager = NetworkManager.shared
+    private let savedNames = APINameTaskStorage.shared
     private let userDefaultsKey = "ifFirstLaunch"
 
+    //MARK: - Fetch Methods
     func fetchTask() {
         if !UserDefaults.standard.bool(forKey: userDefaultsKey) {
             loadTaskFromAPI()
@@ -33,7 +45,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             
             switch result {
                 case .success(let tasks):
-                    self.storageManager.fetchTasksOnAPI(tasks.todos) {
+                    self.storageManager.fetchTasksOnAPI(tasks.todos, savedNames.taskTitles) {
                         UserDefaults.standard.set(true, forKey: self.userDefaultsKey)
                         self.loadTaskFromCoreData()
                     }
@@ -56,6 +68,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
         }
     }
 
+    //MARK: - Task Methods
     func addTask(title: String, details: String) {
         storageManager.create(title, with: details) { [weak self] result in
             guard let self else { return }

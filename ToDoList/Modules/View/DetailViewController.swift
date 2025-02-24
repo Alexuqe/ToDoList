@@ -1,11 +1,15 @@
-//
-//  
-//
-//
-//
-//
+
 
 import UIKit
+
+protocol DetailViewControllerProtocol: AnyObject {
+    var presenter: DetailViewPresenterProtocol? { get set }
+
+    func displayTaskTitle(title: String)
+    func displayTaskDetail(detail: String)
+    func displayDate(date: String)
+    func enableSaveButton(_ enabled: Bool)
+}
 
 final class DetailViewController: UIViewController {
 
@@ -15,7 +19,7 @@ final class DetailViewController: UIViewController {
 
     private let labelStyle = LabelStyles.shared
 
-    //MARK: UI Components
+    //MARK: - UI Components
     lazy var titleTask: UITextField = {
         let view = UITextField()
         view.font = .systemFont(ofSize: 30, weight: .bold)
@@ -51,6 +55,12 @@ final class DetailViewController: UIViewController {
         presenter?.viewDidLoad()
     }
 
+    //MARK: - Override Methods
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+
     //MARK: - Actions
     @objc private func titleDidChange() {
         presenter?.textFieldDidChange(title: titleTask.text, details: detailTextView.text)
@@ -64,7 +74,7 @@ final class DetailViewController: UIViewController {
 
 }
 
-//MARK: DetailViewControllerProtocol
+//MARK: - DetailViewControllerProtocol
 extension DetailViewController: DetailViewControllerProtocol {
 
     func displayTaskTitle(title: String) {
@@ -84,7 +94,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     }
 }
 
-//MARK: Setup UI
+//MARK: - Setup UI
 extension DetailViewController {
 
     func setupUI() {
@@ -141,7 +151,7 @@ extension DetailViewController {
 
 }
 
-//MARK: UITextViewDelegate
+//MARK: - UITextViewDelegate
 extension DetailViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         presenter?.textFieldDidChange(title: titleTask.text, details: textView.text)

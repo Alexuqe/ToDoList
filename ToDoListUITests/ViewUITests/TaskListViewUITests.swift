@@ -51,7 +51,7 @@ final class TaskListViewUITests: XCTestCase {
         let titleTextField = app.textFields["titleTextField"]
         XCTAssertTrue(titleTextField.waitForExistence(timeout: 5), "Title text field should exist")
         titleTextField.tap()
-        titleTextField.press(forDuration: 0.5) // Press to show the selection menu
+        titleTextField.press(forDuration: 1.0) // Press to show the selection menu
         app.menuItems["Select All"].tap()
         app.menuItems["Cut"].tap()// Select all text
         titleTextField.typeText("Редактируемая задача")
@@ -162,13 +162,13 @@ final class TaskListViewUITests: XCTestCase {
         let searchBar = app.searchFields["Поиск"]
         XCTAssertTrue(searchBar.waitForExistence(timeout: 5), "Search bar should exist")
         searchBar.tap()
-        searchBar.typeText("New Task Title")
+        searchBar.typeText("Новая задача")
 
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "count > 0"), object: app.tables.cells)
         let result = XCTWaiter().wait(for: [expectation], timeout: 5)
         XCTAssertEqual(result, .completed, "Table should have filtered cells")
 
-        let filteredTaskCell = app.tables.staticTexts["New Task Title"]
+        let filteredTaskCell = app.tables.staticTexts["Новая задача"]
         XCTAssertTrue(filteredTaskCell.exists, "The search results should display the filtered tasks")
     }
 

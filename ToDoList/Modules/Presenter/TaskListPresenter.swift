@@ -1,17 +1,32 @@
 
 
-
-
-
 import Foundation
+import UIKit
 
+protocol TaskListPresenterProtocol: AnyObject {
+    var view: TaskListViewProtocol? { get set }
+    var interactor: TaskListInteractorProtocol? { get set }
+    var router: TaskListRouterProtocol? { get set }
+
+    func viewDidLoad()
+    func addTask(title: String, details: String)
+    func updateTask(task: TasksList, title: String, details: String)
+    func deleteTask(task: TasksList)
+    func searchTask(title: String)
+    func isCompleted(task: TasksList)
+    func showTasksDetail(for task: TasksList)
+    func showDetailPreview(with task: TasksList, completion: (UIViewController?) -> Void)
+    func showAddTaskScreen()
+}
 
 final class TaskListPresenter: TaskListPresenterProtocol {
 
+    //MARK: Properties
     var view: TaskListViewProtocol?
     var interactor: TaskListInteractorProtocol?
     var router: TaskListRouterProtocol?
-    
+
+    //MARK: - Task Methods
     func viewDidLoad() {
         interactor?.fetchTask()
     }
@@ -37,14 +52,16 @@ final class TaskListPresenter: TaskListPresenterProtocol {
         interactor?.isCompleted(task: task)
     }
 
+    //MARK: - Show Methods
     func showTasksDetail(for task: TasksList) {
         router?.navigateToTaskDetail(with: task) { [weak self] in
             self?.viewDidLoad()
         }
     }
 
-    func showDetailPreview(task: TasksList) {
-        router?.showDetailPreview(with: task)
+    func showDetailPreview(with task: TasksList, completion: (UIViewController?) -> Void) {
+       let perview =  router?.showDetailPreview(with: task)
+        completion(perview)
     }
 
     func showAddTaskScreen() {
@@ -55,6 +72,7 @@ final class TaskListPresenter: TaskListPresenterProtocol {
 
 }
 
+//MARK: - Extension TaskListInteractorOutputProtocol
 extension TaskListPresenter: TaskListInteractorOutputProtocol {
     func didFetchTasks(tasks: [TasksList]) {
         view?.showTasks(tasks: tasks)

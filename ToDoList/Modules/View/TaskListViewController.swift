@@ -1,15 +1,14 @@
-    //
-    //  ViewController.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 20.02.25.
-    //
+
 
 import UIKit
 
+protocol TaskListViewProtocol: AnyObject {
+    func showTasks(tasks: [TasksList])
+}
 
 final class TaskListViewController: UITableViewController, TaskListViewProtocol {
 
+        //MARK: Private UI Components
     private let searchController: UISearchController = {
         let view = UISearchController(searchResultsController: nil)
         view.searchBar.placeholder = "Поиск"
@@ -18,9 +17,11 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
         return view
     }()
 
+        //MARK: Properties
     var presenter: TaskListPresenterProtocol?
     var tasks: [TasksList] = []
 
+        //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -66,44 +67,54 @@ extension TaskListViewController {
 
     //MARK: - UITableViewDelegate
 extension TaskListViewController {
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         tableView.deselectRow(at: indexPath, animated: true)
+        let task = tasks[indexPath.row]
+        presenter?.showTasksDetail(for: task)
     }
 
-    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    override func tableView(
+        _ tableView: UITableView,
+        contextMenuConfigurationForRowAt indexPath: IndexPath,
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
 
         let task = tasks[indexPath.row]
 
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: { [weak self] in
-                return self?.presenter?.router?.showDetailPreview(with: task)
-        }) { _ in
+                var perview: UIViewController?
+                self?.presenter?.showDetailPreview(with: task) { controller in
+                    perview = controller
+                }
+                return perview
+            }) { _ in
 
-            let editAction = UIAction(
-                title: "Редактировать",
-                image: UIImage(systemName: "square.and.pencil")) { [unowned self] _ in
-                presenter?.showTasksDetail(for: task)
+                let editAction = UIAction(
+                    title: "Редактировать",
+                    image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+                        guard let self else { return }
+                        presenter?.showTasksDetail(for: task)
+                    }
+
+                let deleteAction = UIAction(
+                    title: "Удалить",
+                    image: UIImage(systemName: "trash"),
+                    attributes: .destructive) { [weak self] _ in
+                        guard let self else { return }
+                        let deleteTask = tasks.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                        updateToolBarItems()
+                        presenter?.deleteTask(task: deleteTask)
+                    }
+
+                return UIMenu(children: [editAction, deleteAction])
             }
-
-            let deleteAction = UIAction(
-                title: "Удалить",
-                image: UIImage(systemName: "trash"),
-                attributes: .destructive) { [unowned self] _ in
-
-                let deleteTask = tasks.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                updateToolBarItems()
-                presenter?.deleteTask(task: deleteTask)
-            }
-
-            return UIMenu(children: [editAction, deleteAction])
-        }
 
         return configuration
     }
-
 }
 
     //MARK: - Setup UI
@@ -128,7 +139,7 @@ private extension TaskListViewController {
         tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
     }
 
-    //MARK: - Navigation Controller
+        //MARK: - Navigation Controller
     func setupNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .white
@@ -149,7 +160,7 @@ private extension TaskListViewController {
         let micImage = UIImage(
             systemName: "mic.fill")?
             .withTintColor(.systemGray2,
-            renderingMode: .alwaysOriginal)
+                           renderingMode: .alwaysOriginal)
 
         let searchBar = searchController.searchBar
         searchBar.tintColor = .white
@@ -176,7 +187,6 @@ private extension TaskListViewController {
         navigationController?.isToolbarHidden = false
         navigationController?.toolbar.barStyle = .black
 
-
         let taskCountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
         taskCountLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         taskCountLabel.textAlignment = .center
@@ -201,7 +211,7 @@ private extension TaskListViewController {
         toolbarItems = [flexibleSpace, countLabel, flexibleSpace, addButton]
     }
 
-    //MARK: Actions
+        //MARK: Actions
     @objc private func tapAddButton() {
         presenter?.showAddTaskScreen()
     }
@@ -217,7 +227,7 @@ private extension TaskListViewController {
     }
 }
 
-//MARK: UISearchController ResultsUpdating
+    //MARK: UISearchController ResultsUpdating
 extension TaskListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }

@@ -22,7 +22,7 @@ final class LabelStyles {
 
     func detailLabelStyle() -> UILabel {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .white
         label.numberOfLines = 2
         label.textAlignment = .left
@@ -33,7 +33,7 @@ final class LabelStyles {
     func dateLabelStyle() -> UILabel {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        label.textColor = .systemGray4
+        label.textColor = .systemGray5
         label.numberOfLines = 1
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
