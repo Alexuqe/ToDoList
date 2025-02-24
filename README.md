@@ -20,7 +20,7 @@ This project is a simple and intuitive ToDo List application designed for iOS de
 
 ### Main Screen / Основной экран
 
-[Экран загрузки приложения](images/App launch Screen.png)
+[Экран загрузки приложения](About Project/images/App launch Screen.png)
 [Основной экран](images/App Main Scree.png)
 
 
