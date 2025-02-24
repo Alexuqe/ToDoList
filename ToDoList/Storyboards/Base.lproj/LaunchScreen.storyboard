@@ -14,19 +14,11 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="f2q-bk-QeK">
-                                <rect key="frame" x="0.0" y="40" width="393" height="878"/>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.015686274509803921" green="0.015686274509803921" blue="0.015686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="f2q-bk-QeK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="100" id="Z5p-HA-zpz"/>
-                            <constraint firstItem="f2q-bk-QeK" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" constant="40" id="iw8-ZO-f7p"/>
-                            <constraint firstItem="f2q-bk-QeK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mzQ-MT-f8u"/>
-                            <constraint firstItem="f2q-bk-QeK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qdw-uS-aiV"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.015686274510000001" green="0.015686274510000001" blue="0.015686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" image="YES"/>
+                        </accessibility>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -34,7 +26,4 @@
             <point key="canvasLocation" x="52.671755725190835" y="374.64788732394368"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="launchScreen" width="2000" height="3000"/>
-    </resources>
 </document>
