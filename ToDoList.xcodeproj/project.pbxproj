@@ -39,13 +39,13 @@
 		CE8A61992D6CE97400077BD8 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A61982D6CE96C00077BD8 /* LaunchScreenViewController.swift */; };
 		CE8A619F2D6CE9A600077BD8 /* LaunchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A619E2D6CE99F00077BD8 /* LaunchScreenPresenter.swift */; };
 		CE8A61A12D6CE9B200077BD8 /* LaunchScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A61A02D6CE9AC00077BD8 /* LaunchScreenRouter.swift */; };
-		CE8A61AD2D6D081B00077BD8 /* App launch Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61A72D6D081B00077BD8 /* App launch Screen.png */; };
-		CE8A61AE2D6D081B00077BD8 /* Context Menus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61A92D6D081B00077BD8 /* Context Menus.png */; };
-		CE8A61AF2D6D081B00077BD8 /* Search Task.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61AC2D6D081B00077BD8 /* Search Task.png */; };
-		CE8A61B02D6D081B00077BD8 /* isCompleted Button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61AB2D6D081B00077BD8 /* isCompleted Button.png */; };
-		CE8A61B12D6D081B00077BD8 /* App Main Scree.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61A82D6D081B00077BD8 /* App Main Scree.png */; };
-		CE8A61B22D6D081B00077BD8 /* Detail Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61AA2D6D081B00077BD8 /* Detail Screen.png */; };
-		CE8A61B32D6D081B00077BD8 /* Add Task Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61A62D6D081B00077BD8 /* Add Task Screen.png */; };
+		CE8A61BB2D6D186000077BD8 /* Detail Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B82D6D186000077BD8 /* Detail Screen.png */; };
+		CE8A61BC2D6D186000077BD8 /* App Main Scree.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B62D6D186000077BD8 /* App Main Scree.png */; };
+		CE8A61BD2D6D186000077BD8 /* Search Task.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61BA2D6D186000077BD8 /* Search Task.png */; };
+		CE8A61BE2D6D186000077BD8 /* App launch Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B52D6D186000077BD8 /* App launch Screen.png */; };
+		CE8A61BF2D6D186000077BD8 /* Context Menus.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B72D6D186000077BD8 /* Context Menus.png */; };
+		CE8A61C02D6D186000077BD8 /* isCompleted Button.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B92D6D186000077BD8 /* isCompleted Button.png */; };
+		CE8A61C12D6D186000077BD8 /* Add Task Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B42D6D186000077BD8 /* Add Task Screen.png */; };
 		CE9B56F22D6A12A200977D93 /* TaskContextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */; };
 		CE9B56FB2D6A180D00977D93 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56FA2D6A180300977D93 /* LabelStyles.swift */; };
 /* End PBXBuildFile section */
@@ -104,14 +104,13 @@
 		CE8A61982D6CE96C00077BD8 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		CE8A619E2D6CE99F00077BD8 /* LaunchScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenPresenter.swift; sourceTree = "<group>"; };
 		CE8A61A02D6CE9AC00077BD8 /* LaunchScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenRouter.swift; sourceTree = "<group>"; };
-		CE8A61A22D6D047E00077BD8 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
-		CE8A61A62D6D081B00077BD8 /* Add Task Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Add Task Screen.png"; sourceTree = "<group>"; };
-		CE8A61A72D6D081B00077BD8 /* App launch Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App launch Screen.png"; sourceTree = "<group>"; };
-		CE8A61A82D6D081B00077BD8 /* App Main Scree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App Main Scree.png"; sourceTree = "<group>"; };
-		CE8A61A92D6D081B00077BD8 /* Context Menus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Context Menus.png"; sourceTree = "<group>"; };
-		CE8A61AA2D6D081B00077BD8 /* Detail Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Detail Screen.png"; sourceTree = "<group>"; };
-		CE8A61AB2D6D081B00077BD8 /* isCompleted Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isCompleted Button.png"; sourceTree = "<group>"; };
-		CE8A61AC2D6D081B00077BD8 /* Search Task.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search Task.png"; sourceTree = "<group>"; };
+		CE8A61B42D6D186000077BD8 /* Add Task Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Add Task Screen.png"; sourceTree = "<group>"; };
+		CE8A61B52D6D186000077BD8 /* App launch Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App launch Screen.png"; sourceTree = "<group>"; };
+		CE8A61B62D6D186000077BD8 /* App Main Scree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App Main Scree.png"; sourceTree = "<group>"; };
+		CE8A61B72D6D186000077BD8 /* Context Menus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Context Menus.png"; sourceTree = "<group>"; };
+		CE8A61B82D6D186000077BD8 /* Detail Screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Detail Screen.png"; sourceTree = "<group>"; };
+		CE8A61B92D6D186000077BD8 /* isCompleted Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isCompleted Button.png"; sourceTree = "<group>"; };
+		CE8A61BA2D6D186000077BD8 /* Search Task.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search Task.png"; sourceTree = "<group>"; };
 		CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContextPreview.swift; sourceTree = "<group>"; };
 		CE9B56FA2D6A180300977D93 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +146,13 @@
 				CE2E2ACA2D6786720006B305 /* ToDoList */,
 				CE5449172D6B4A9C001914C4 /* ToDoListTests */,
 				CE54491B2D6B4A9C001914C4 /* ToDoListUITests */,
-				CE8A61A42D6D073F00077BD8 /* About Project */,
+				CE8A61B42D6D186000077BD8 /* Add Task Screen.png */,
+				CE8A61B52D6D186000077BD8 /* App launch Screen.png */,
+				CE8A61B62D6D186000077BD8 /* App Main Scree.png */,
+				CE8A61B72D6D186000077BD8 /* Context Menus.png */,
+				CE8A61B82D6D186000077BD8 /* Detail Screen.png */,
+				CE8A61B92D6D186000077BD8 /* isCompleted Button.png */,
+				CE8A61BA2D6D186000077BD8 /* Search Task.png */,
 				CE2E2A8C2D6786020006B305 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -362,29 +367,6 @@
 			path = ViewUITests;
 			sourceTree = "<group>";
 		};
-		CE8A61A42D6D073F00077BD8 /* About Project */ = {
-			isa = PBXGroup;
-			children = (
-				CE8A61A52D6D079100077BD8 /* images */,
-				CE8A61A22D6D047E00077BD8 /* Readme.md */,
-			);
-			path = "About Project";
-			sourceTree = "<group>";
-		};
-		CE8A61A52D6D079100077BD8 /* images */ = {
-			isa = PBXGroup;
-			children = (
-				CE8A61A62D6D081B00077BD8 /* Add Task Screen.png */,
-				CE8A61A72D6D081B00077BD8 /* App launch Screen.png */,
-				CE8A61A82D6D081B00077BD8 /* App Main Scree.png */,
-				CE8A61A92D6D081B00077BD8 /* Context Menus.png */,
-				CE8A61AA2D6D081B00077BD8 /* Detail Screen.png */,
-				CE8A61AB2D6D081B00077BD8 /* isCompleted Button.png */,
-				CE8A61AC2D6D081B00077BD8 /* Search Task.png */,
-			);
-			path = images;
-			sourceTree = "<group>";
-		};
 		CE9B56F02D6A127900977D93 /* TaskContextPreview */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,13 +494,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8A61AD2D6D081B00077BD8 /* App launch Screen.png in Resources */,
-				CE8A61AE2D6D081B00077BD8 /* Context Menus.png in Resources */,
-				CE8A61AF2D6D081B00077BD8 /* Search Task.png in Resources */,
-				CE8A61B02D6D081B00077BD8 /* isCompleted Button.png in Resources */,
-				CE8A61B12D6D081B00077BD8 /* App Main Scree.png in Resources */,
-				CE8A61B22D6D081B00077BD8 /* Detail Screen.png in Resources */,
-				CE8A61B32D6D081B00077BD8 /* Add Task Screen.png in Resources */,
+				CE8A61BB2D6D186000077BD8 /* Detail Screen.png in Resources */,
+				CE8A61BC2D6D186000077BD8 /* App Main Scree.png in Resources */,
+				CE8A61BD2D6D186000077BD8 /* Search Task.png in Resources */,
+				CE8A61BE2D6D186000077BD8 /* App launch Screen.png in Resources */,
+				CE8A61BF2D6D186000077BD8 /* Context Menus.png in Resources */,
+				CE8A61C02D6D186000077BD8 /* isCompleted Button.png in Resources */,
+				CE8A61C12D6D186000077BD8 /* Add Task Screen.png in Resources */,
 				CE2E2ACC2D6786720006B305 /* Assets.xcassets in Resources */,
 				CE2E2ACE2D6786720006B305 /* LaunchScreen.storyboard in Resources */,
 			);
