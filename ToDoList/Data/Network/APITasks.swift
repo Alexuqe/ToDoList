@@ -26,6 +26,6 @@ struct APINameTaskStorage {
         "Invite friends", "Have scrimmage", "Text friend", "Organize pantry", "Buy decoration",
         "Plan vacation", "Clean car", "Draw Mandala", "Create cookbook", "Bake pie",
         "Create compost", "Take hike", "Take class", "Research topic", "Plan trip",
-        "Improve typing", "Learn Express.js", "Learn calligraphy", "Have session", "Go gym"
+        "Improve typing", "Learn Express", "Learn calligraphy", "Have session", "Go gym"
     ]
 }
