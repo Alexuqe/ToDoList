@@ -11,6 +11,8 @@ This project is a simple and intuitive ToDo List application designed for iOS de
 - Core Data: Utilized for local data storage and management of tasks.
 - MVP/VIPER Architecture: Employed to separate concerns and enhance scalability, maintainability, and testability of the code. The architecture consists of Modules for View, Presenter, Interactor, and Router.
 - XCTest: Used for writing unit tests and ensuring the reliability of the app's components.
+  
+--------------------------------------------------------------
 
 - UIKit: Для построения пользовательского интерфейса и обработки анимаций.
 - Core Data: Используется для локального хранения данных и управления задачами.
