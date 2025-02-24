@@ -20,25 +20,23 @@ This project is a simple and intuitive ToDo List application designed for iOS de
 
 ### Main Screen / Основной экран
 
-![Экран загрузки приложения](About Project/images/App launch Screen.png)
-![Основной экран](images/App Main Scree.png)
+<img src="https://github.com/user-attachments/assets/58cc0fdc-3ed2-4aca-8015-c56c76f35d98" width="450" height="1000">
+<img src="https://github.com/user-attachments/assets/e8e40031-0880-4fec-93c6-2246e9c939e3" width="450" height="1000">
+
 
 
 ### Adding a New Task / Добавление новой задачи
 
-![Основной экран](images/Add Task Screen.png)
-
+<img src="https://github.com/user-attachments/assets/c4383f73-65d6-4167-9c36-b7bb6069ed3c" width="450" height="1000">
 
 ### Task Details / Детали задачи
 
-![Основной экран](images/Detail Screen.png)
-
+<img src="https://github.com/user-attachments/assets/671597be-7d31-4deb-8d9d-0dffeae6cebe" width="450" height="1000">
 
 ### Contextual Menu / Контекстное меню
 
-[Основной экран](images/Context Menus.png)
-
+<img src="https://github.com/user-attachments/assets/93d7e89d-5e19-44df-a88d-df5cb60ef71d" width="450" height="1000">
 
 ### Отметка выполненной задачи / Marking a Task as Completed
 
-![Основной экран](images/isCompleted Button.png)
+<img src="https://github.com/user-attachments/assets/039bc8a3-387c-42c7-a603-f4694d556392" width="450" height="1000">
