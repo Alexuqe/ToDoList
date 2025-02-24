@@ -20,18 +20,18 @@ This project is a simple and intuitive ToDo List application designed for iOS de
 
 ### Main Screen / Основной экран
 
-[Экран загрузки приложения](About Project/images/App launch Screen.png)
-[Основной экран](images/App Main Scree.png)
+![Экран загрузки приложения](About Project/images/App launch Screen.png)
+![Основной экран](images/App Main Scree.png)
 
 
 ### Adding a New Task / Добавление новой задачи
 
-[Основной экран](images/Add Task Screen.png)
+![Основной экран](images/Add Task Screen.png)
 
 
 ### Task Details / Детали задачи
 
-[Основной экран](images/Detail Screen.png)
+![Основной экран](images/Detail Screen.png)
 
 
 ### Contextual Menu / Контекстное меню
