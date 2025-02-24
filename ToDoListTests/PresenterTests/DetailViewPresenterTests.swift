@@ -1,9 +1,3 @@
-    //
-    //  DetailViewPresenterTests.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 23.02.25.
-    //
 
     import XCTest
     @testable import ToDoList
