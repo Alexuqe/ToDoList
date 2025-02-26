@@ -1,9 +1,3 @@
-    //
-    //  TaskLIstPresenterTests.swift
-    //  ToDoList
-    //
-    //  Created by Sasha on 23.02.25.
-    //
 
     import XCTest
     import CoreData
@@ -103,19 +97,20 @@
         func isCompleted(task: TasksList) {}
     }
 
-    class MockTaskListRouter: TaskListRouterProtocol {
-        var viewController: UITableViewController?
+class MockTaskListRouter: TaskListRouterProtocol {
 
-        static func createdModule() -> UITableViewController {
-            return UITableViewController()
-        }
+    var viewController: UITableViewController?
 
-        func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void) {}
-        func navigateToAddTask(completion: @escaping () -> Void) {}
-        func showDetailPreview(with task: TasksList) -> UIViewController {
-            return UIViewController()
-        }
+    static func createdModule() -> UITableViewController {
+        return UITableViewController()
     }
+
+    func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void) {}
+    func navigateToAddTask(completion: @escaping () -> Void) {}
+    func showDetailPreview(with task: ToDoList.TasksList) -> UIViewController? {
+        return UIViewController()
+    }
+}
 
     extension TasksList {
         convenience init(testTitle: String, testDetails: String, testDate: Date, testIsCompleted: Bool) {
