@@ -50,23 +50,26 @@
         }
     }
 
-    class MockTaskListPresenter: TaskListPresenterProtocol {
-            var viewDidLoadCalled = false
+class MockTaskListPresenter: TaskListPresenterProtocol {
 
-            var view: TaskListViewProtocol?
-            var interactor: TaskListInteractorProtocol?
-            var router: TaskListRouterProtocol?
+    var viewDidLoadCalled = false
 
-            func viewDidLoad() {
-                viewDidLoadCalled = true
-            }
+    var view: TaskListViewProtocol?
+    var interactor: TaskListInteractorProtocol?
+    var router: TaskListRouterProtocol?
 
-            func addTask(title: String, details: String) {}
-            func updateTask(task: TasksList, title: String, details: String) {}
-            func deleteTask(task: TasksList) {}
-            func searchTask(title: String) {}
-            func isCompleted(task: TasksList) {}
-            func showTasksDetail(for task: TasksList) {}
-            func showDetailPreview(task: TasksList) {}
-            func showAddTaskScreen() {}
+    func viewDidLoad() {
+        viewDidLoadCalled = true
     }
+
+    func addTask(title: String, details: String) {}
+    func updateTask(task: TasksList, title: String, details: String) {}
+    func deleteTask(task: TasksList) {}
+    func searchTask(title: String) {}
+    func isCompleted(task: TasksList) {}
+    func segmentedTasks(at index: Int) {}
+    
+    func showTasksDetail(for task: TasksList) {}
+    func showAddTaskScreen() {}
+    func showDetailPreview(with task: ToDoList.TasksList, completion: (UIViewController?) -> Void) {}
+}

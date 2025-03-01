@@ -52,7 +52,6 @@ final class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         view.backgroundColor = .darkBackground
-        presenter?.viewDidLoad()
     }
 
     //MARK: - Override Methods

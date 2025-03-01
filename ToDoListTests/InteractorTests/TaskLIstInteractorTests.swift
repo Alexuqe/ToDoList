@@ -50,7 +50,7 @@ class TaskListInteractorTests: XCTestCase {
 
 // MARK: - Mocks
 class MockStorageManager: StorageManagerProtocol {
-    
+
     var fetchTasksCalled = false
     var deleteCalled = false
 
@@ -84,9 +84,15 @@ class MockStorageManager: StorageManagerProtocol {
     func isCompletedTask(task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void) {
         completion(.success([]))
     }
+
+    func segmentedTask(index: Int, completion: @escaping (Result<[ToDoList.TasksList], any Error>) -> Void) {
+        completion(.success([]))
+    }
+
 }
 
 class MockTaskListPresenterOutput: TaskListInteractorOutputProtocol & TaskListPresenterProtocol {
+
     var view: TaskListViewProtocol?
     var interactor: TaskListInteractorProtocol?
     var router: TaskListRouterProtocol?
@@ -97,8 +103,9 @@ class MockTaskListPresenterOutput: TaskListInteractorOutputProtocol & TaskListPr
     func deleteTask(task: TasksList) {}
     func searchTask(title: String) {}
     func isCompleted(task: TasksList) {}
+    func segmentedTasks(at index: Int) {}
     func showTasksDetail(for task: TasksList) {}
-    func showDetailPreview(task: TasksList) {}
+    func showDetailPreview(with task: ToDoList.TasksList, completion: (UIViewController?) -> Void) { }
     func showAddTaskScreen() {}
 
     func didFetchTasks(tasks: [TasksList]) {}

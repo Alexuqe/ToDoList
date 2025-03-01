@@ -7,28 +7,41 @@ protocol TaskListPresenterProtocol: AnyObject {
     var view: TaskListViewProtocol? { get set }
     var interactor: TaskListInteractorProtocol? { get set }
     var router: TaskListRouterProtocol? { get set }
+    var tasks: [TasksList] { get set }
 
     func viewDidLoad()
+
     func addTask(title: String, details: String)
     func updateTask(task: TasksList, title: String, details: String)
     func deleteTask(task: TasksList)
     func searchTask(title: String)
     func isCompleted(task: TasksList)
+    func didSelectSegment(at index: Int)
+
     func showTasksDetail(for task: TasksList)
     func showDetailPreview(with task: TasksList, completion: (UIViewController?) -> Void)
     func showAddTaskScreen()
 }
 
+
+
 final class TaskListPresenter: TaskListPresenterProtocol {
 
     //MARK: Properties
-    var view: TaskListViewProtocol?
+    weak var view: TaskListViewProtocol?
     var interactor: TaskListInteractorProtocol?
     var router: TaskListRouterProtocol?
+    var tasks: [TasksList] = []
+
+    init(view: TaskListViewProtocol, interactor: TaskListInteractorProtocol, router: TaskListRouterProtocol) {
+        self.view = view
+        self.interactor = interactor
+        self.router = router
+    }
 
     //MARK: - Task Methods
     func viewDidLoad() {
-        interactor?.fetchTask()
+        interactor?.fetchTaskForCurrentSegment()
     }
     
     func addTask(title: String, details: String) {
@@ -41,7 +54,6 @@ final class TaskListPresenter: TaskListPresenterProtocol {
     
     func deleteTask(task: TasksList) {
         interactor?.deleteTask(task: task)
-        interactor?.fetchTask()
     }
     
     func searchTask(title: String) {
@@ -50,6 +62,10 @@ final class TaskListPresenter: TaskListPresenterProtocol {
 
     func isCompleted(task: TasksList) {
         interactor?.isCompleted(task: task)
+    }
+
+    func didSelectSegment(at index: Int) {
+        interactor?.segmentChanged(to: index)
     }
 
     //MARK: - Show Methods
@@ -70,11 +86,31 @@ final class TaskListPresenter: TaskListPresenterProtocol {
         }
     }
 
+
 }
 
-//MARK: - Extension TaskListInteractorOutputProtocol
+//MARK: - TaskListInteractorOutputProtocol
 extension TaskListPresenter: TaskListInteractorOutputProtocol {
+
     func didFetchTasks(tasks: [TasksList]) {
+        self.tasks = tasks
         view?.showTasks(tasks: tasks)
     }
+
+    func didReceiveError(_ error: any Error) {
+        view?.showError(error.localizedDescription)
+    }
+    
+    func taskCreated(_ task: TasksList) {
+        view?.showSuccess()
+    }
+    
+    func taskDeleted() {
+        view?.showSuccess()
+    }
+    
+    func taskUpdated() {
+        view?.showSuccess()
+    }
+
 }

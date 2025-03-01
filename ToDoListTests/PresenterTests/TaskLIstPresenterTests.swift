@@ -79,23 +79,26 @@
         }
     }
 
-    class MockTaskListInteractor: TaskListInteractorProtocol {
-        var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)?
-        var fetchTaskCalled = false
-        var deleteTaskCalled = false
+class MockTaskListInteractor: TaskListInteractorProtocol {
 
-        func fetchTask() {
-            fetchTaskCalled = true
-        }
+    var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)?
+    var fetchTaskCalled = false
+    var deleteTaskCalled = false
 
-        func addTask(title: String, details: String) {}
-        func updateTask(task: TasksList, title: String, details: String) {}
-        func deleteTask(task: TasksList) {
-            deleteTaskCalled = true
-        }
-        func searchTask(title: String) {}
-        func isCompleted(task: TasksList) {}
+    func fetchTask() {
+        fetchTaskCalled = true
     }
+
+    func addTask(title: String, details: String) {}
+    func updateTask(task: TasksList, title: String, details: String) {}
+    func deleteTask(task: TasksList) {
+        deleteTaskCalled = true
+    }
+    func searchTask(title: String) {}
+    func isCompleted(task: TasksList) {}
+    func segmentedTasks(at index: Int) {}
+
+}
 
 class MockTaskListRouter: TaskListRouterProtocol {
 

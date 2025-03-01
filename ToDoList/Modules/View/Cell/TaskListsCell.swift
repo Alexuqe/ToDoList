@@ -62,6 +62,7 @@ final class TaskListsCell: UITableViewCell {
     static let identifer = "TaskListCell"
     var taskList: TasksList?
     var presenter: TaskListPresenterProtocol?
+    var completionToggleHandler: (() -> Void)?
 
     //MARK: Private UI Components
     private lazy var checkoutButton: UIButton = {
@@ -140,8 +141,9 @@ final class TaskListsCell: UITableViewCell {
 
     //MARK: - Action
     @objc private func checkoutButtonTapped() {
-        guard let taskList = taskList else { return }
-        presenter?.isCompleted(task: taskList)
+//        guard let taskList = taskList else { return }
+//        presenter?.isCompleted(task: taskList)
+        completionToggleHandler?()
     }
 }
 

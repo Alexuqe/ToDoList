@@ -20,16 +20,12 @@ final class TaskListRouter: TaskListRouterProtocol {
     //MARK: - Static Methods
     static func createdModule() -> UITableViewController {
         let view = TaskListViewController()
-        let presenter: TaskListPresenterProtocol & TaskListInteractorOutputProtocol = TaskListPresenter()
         let interactor: TaskListInteractorProtocol = TaskListInteractor()
         let router: TaskListRouterProtocol = TaskListRouter()
+        let presenter = TaskListPresenter(view: view, interactor: interactor, router: router)
 
         view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        presenter.router = router
         interactor.presenter = presenter
-
         router.viewController = view
 
         return view

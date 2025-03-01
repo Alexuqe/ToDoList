@@ -6,29 +6,36 @@ protocol TaskListInteractorProtocol: AnyObject {
     var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)? { get set }
 
     func fetchTask()
+    func fetchTaskForCurrentSegment()
     func addTask(title: String, details: String)
     func updateTask(task: TasksList, title: String, details: String)
     func deleteTask(task: TasksList)
     func searchTask(title: String)
     func isCompleted(task: TasksList)
+    func segmentChanged(to index: Int)
 }
 
 protocol TaskListInteractorOutputProtocol: AnyObject {
     func didFetchTasks(tasks: [TasksList])
+    func didReceiveError(_ error: Error)
+    func taskCreated(_ task: TasksList)
+    func taskDeleted()
+    func taskUpdated()
 }
 
 final class TaskListInteractor: TaskListInteractorProtocol {
 
-    //MARK: - Properties
+        //MARK: - Properties
     var presenter: (TaskListInteractorOutputProtocol & TaskListPresenterProtocol)?
     var storageManager: StorageManagerProtocol = StorageManager.shared
+    private var currentIndex = 0
 
-    //MARK: - Private Properties
+        //MARK: - Private Properties
     private let networkManager = NetworkManager.shared
     private let savedNames = APINameTaskStorage.shared
     private let userDefaultsKey = "ifFirstLaunch"
 
-    //MARK: - Fetch Methods
+        //MARK: - Fetch Methods
     func fetchTask() {
         if !UserDefaults.standard.bool(forKey: userDefaultsKey) {
             loadTaskFromAPI()
@@ -42,7 +49,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
 
         networkManager.fetch(APITasks.self, url: url) { [weak self] result in
             guard let self else { return }
-            
+
             switch result {
                 case .success(let tasks):
                     self.storageManager.fetchTasksOnAPI(tasks.todos, savedNames.taskTitles) {
@@ -63,21 +70,33 @@ final class TaskListInteractor: TaskListInteractorProtocol {
                 case .success(let tasks):
                     presenter?.didFetchTasks(tasks: tasks)
                 case .failure(let error):
-                    print(error)
+                    presenter?.didReceiveError(error)
             }
         }
     }
 
-    //MARK: - Task Methods
+    func fetchTaskForCurrentSegment() {
+        storageManager.segmentedTask(index: currentIndex) { [weak self] result in
+            switch result {
+                case .success(let tasks):
+                    self?.presenter?.didFetchTasks(tasks: tasks)
+                case .failure(let error):
+                    self?.presenter?.didReceiveError(error)
+            }
+        }
+    }
+
+        //MARK: - Task Methods
     func addTask(title: String, details: String) {
         storageManager.create(title, with: details) { [weak self] result in
             guard let self else { return }
 
             switch result {
-                case .success(let tasks):
-                    presenter?.didFetchTasks(tasks: tasks)
+                case .success(let task):
+                    presenter?.taskCreated(task)
+                    fetchTaskForCurrentSegment()
                 case .failure(let error):
-                    print(error)
+                    presenter?.didReceiveError(error)
             }
         }
     }
@@ -87,8 +106,9 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             guard let self else { return }
 
             switch result {
-                case .success(let tasks):
-                    presenter?.didFetchTasks(tasks: tasks)
+                case .success():
+                    presenter?.taskUpdated()
+                    fetchTaskForCurrentSegment()
                 case .failure(let error):
                     print(error)
             }
@@ -100,10 +120,11 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             guard let self else { return }
 
             switch result {
-                case .success(let tasks):
-                    presenter?.didFetchTasks(tasks: tasks)
+                case .success():
+                    presenter?.taskDeleted()
+                    fetchTaskForCurrentSegment()
                 case .failure(let error):
-                    print(error)
+                    presenter?.didReceiveError(error)
             }
         }
     }
@@ -114,7 +135,7 @@ final class TaskListInteractor: TaskListInteractorProtocol {
 
             switch result {
                 case .success(let tasks):
-                    presenter?.didFetchTasks(tasks: tasks)
+            presenter?.didFetchTasks(tasks: tasks)
                 case .failure(let error):
                     print(error)
             }
@@ -126,13 +147,20 @@ final class TaskListInteractor: TaskListInteractorProtocol {
             guard let self else { return }
 
             switch result {
-                case .success(let task):
-                    presenter?.didFetchTasks(tasks: task)
+                case .success():
+                    fetchTaskForCurrentSegment()
                 case .failure(let error):
-                    print(error)
+                    presenter?.didReceiveError(error)
             }
         }
     }
+
+    func segmentChanged(to index: Int) {
+        currentIndex = index
+        fetchTaskForCurrentSegment()
+    }
+
+
 
 
 }

@@ -106,12 +106,14 @@ class MockDetailViewInteractorOutput: DetailViewInteractorOutputProtocol {
 }
 
 class MockDetailStorageManager: StorageManagerProtocol {
+
     var createCalled = false
     var updateCalled = false
     var fetchTasksOnAPICalled = false
     var deleteCalled = false
     var searchCalled = false
     var isCompletedCalled = false
+    var segmentedCalled = false
 
     var viewContext: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 
@@ -152,4 +154,10 @@ class MockDetailStorageManager: StorageManagerProtocol {
         isCompletedCalled = true
         completion(.success([]))
     }
+
+    func segmentedTask(task: ToDoList.TasksList, index: Int, completion: @escaping (Result<[ToDoList.TasksList], any Error>) -> Void) {
+        segmentedCalled = true
+        completion(.success([]))
+    }
+
 }

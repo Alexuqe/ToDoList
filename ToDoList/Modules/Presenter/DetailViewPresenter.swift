@@ -8,7 +8,6 @@ protocol DetailViewPresenterProtocol: AnyObject {
     var interactor: DetailViewInteractorProtocol? { get set }
     var router: DetailViewRouterProtocol? { get set }
 
-    func viewDidLoad()
     func saveButtonTapped(title: String, details: String)
     func textFieldDidChange(title: String?, details: String?)
     func configure(with task: TasksList)
@@ -23,16 +22,8 @@ final class DetailViewPresenter: DetailViewPresenterProtocol {
     var router: DetailViewRouterProtocol?
 
     //MARK: - Private Properties
-    private let detailView = DetailViewController()
-    private var isEditMode: Bool = false
 
-    //MARK: - Lifecycle Methods
-    func viewDidLoad() {
-        if isEditMode {
-        } else {
-            view?.displayDate(date: "Сегодня")
-        }
-    }
+    private var isEditMode: Bool = false
 
     //MARK: - Configuration Methods
     func configure(with task: TasksList) {

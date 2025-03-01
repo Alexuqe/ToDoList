@@ -7,11 +7,12 @@ import CoreData
 protocol StorageManagerProtocol {
     func fetchTasksOnAPI(_ apiTasks: [APITask], _ savedNameTask: [String], completion: @escaping () -> Void)
     func fetchTasks(completion: @escaping (Result<[TasksList], Error>) -> Void)
-    func create(_ title: String, with details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
-    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
-    func delete(_ task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func create(_ title: String, with details: String, completion: @escaping (Result<TasksList, Error>) -> Void)
+    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func delete(_ task: TasksList, completion: @escaping (Result<Void, Error>) -> Void)
+    func isCompletedTask(task: TasksList, completion: @escaping (Result<Void, Error>) -> Void)
     func searchTask(title: String, completion: @escaping (Result<[TasksList], Error>) -> Void)
-    func isCompletedTask(task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void)
+    func segmentedTask(index: Int, completion: @escaping (Result<[TasksList], Error>) -> Void)
 }
 
 
@@ -26,12 +27,11 @@ final class StorageManager: StorageManagerProtocol {
 
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "TasksList")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-
+        container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         return container
     }()
 
@@ -39,6 +39,7 @@ final class StorageManager: StorageManagerProtocol {
     private init() {
         viewContext = persistentContainer.viewContext
         backgroundViewContext = persistentContainer.newBackgroundContext()
+        backgroundViewContext.automaticallyMergesChangesFromParent = true
     }
 
         //MARK: - Fetch Store Data
@@ -64,6 +65,8 @@ final class StorageManager: StorageManagerProtocol {
 
     func fetchTasks(completion: @escaping (Result<[TasksList], Error>) -> Void) {
         let fetchRequest = TasksList.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         backgroundViewContext.perform {
             do {
                 let tasks = try self.backgroundViewContext.fetch(fetchRequest)
@@ -79,7 +82,7 @@ final class StorageManager: StorageManagerProtocol {
     }
 
         //MARK: - Operations
-    func create(_ title: String, with details: String, completion: @escaping (Result<[TasksList], Error>) -> Void) {
+    func create(_ title: String, with details: String, completion: @escaping (Result<TasksList, Error>) -> Void) {
         backgroundViewContext.perform {
 
             let task = TasksList(context: self.backgroundViewContext)
@@ -89,7 +92,9 @@ final class StorageManager: StorageManagerProtocol {
             task.isCompleted = false
             do {
                 try self.backgroundViewContext.save()
-                self.fetchTasks(completion: completion)
+                DispatchQueue.main.async {
+                    completion(.success(task))
+                }
             } catch {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -98,14 +103,16 @@ final class StorageManager: StorageManagerProtocol {
         }
     }
 
-    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<[TasksList], Error>) -> Void) {
+    func updateTask(task: TasksList, title: String, details: String, completion: @escaping (Result<Void, Error>) -> Void) {
         backgroundViewContext.perform {
             task.title = title
             task.details = details
 
             do {
                 try self.backgroundViewContext.save()
-                self.fetchTasks(completion: completion)
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
             } catch {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -114,13 +121,15 @@ final class StorageManager: StorageManagerProtocol {
         }
     }
 
-    func delete(_ task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void) {
+    func delete(_ task: TasksList, completion: @escaping (Result<Void, Error>) -> Void) {
         backgroundViewContext.perform {
             self.backgroundViewContext.delete(task)
 
             do {
                 try self.backgroundViewContext.save()
-                self.fetchTasks(completion: completion)
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
             } catch {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -147,16 +156,47 @@ final class StorageManager: StorageManagerProtocol {
                 }
             }
         }
-
     }
 
-    func isCompletedTask(task: TasksList, completion: @escaping (Result<[TasksList], Error>) -> Void) {
+    func isCompletedTask(task: TasksList, completion: @escaping (Result<Void, Error>) -> Void) {
         backgroundViewContext.perform {
             task.isCompleted.toggle()
 
             do {
                 try self.backgroundViewContext.save()
-                self.fetchTasks(completion: completion)
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    func segmentedTask(index: Int, completion: @escaping (Result<[TasksList], Error>) -> Void) {
+        let fetchRequest = TasksList.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        backgroundViewContext.perform {
+            switch index {
+                case 0:
+                    fetchRequest.predicate = nil
+                case 1:
+                    fetchRequest.predicate = NSPredicate(format: "isCompleted == true")
+                case 2:
+                    fetchRequest.predicate = NSPredicate(format: "isCompleted == false")
+                default:
+                    fetchRequest.predicate = nil
+            }
+
+            do {
+                let tasks = try self.backgroundViewContext.fetch(fetchRequest)
+                DispatchQueue.main.async {
+                    completion(.success(tasks))
+                }
             } catch {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -185,5 +225,7 @@ final class StorageManager: StorageManagerProtocol {
             }
         }
     }
+
+
 
 }

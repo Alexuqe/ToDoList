@@ -15,7 +15,6 @@
 		CE2E2AD22D6786720006B305 /* TaskListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2AC92D6786720006B305 /* TaskListViewController.swift */; };
 		CE2E2ADD2D6789E40006B305 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2ADC2D6789E40006B305 /* NetworkManager.swift */; };
 		CE2E2ADF2D6789F50006B305 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2ADE2D6789F00006B305 /* StorageManager.swift */; };
-		CE2E2AE72D678BB00006B305 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2AE62D678B980006B305 /* Task.swift */; };
 		CE2E2B012D6796240006B305 /* APITasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B002D67960B0006B305 /* APITasks.swift */; };
 		CE2E2B032D67A96E0006B305 /* TaskListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B022D67A96E0006B305 /* TaskListInteractor.swift */; };
 		CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */; };
@@ -80,7 +79,6 @@
 		CE2E2ACB2D6786720006B305 /* TasksList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TasksList.xcdatamodel; sourceTree = "<group>"; };
 		CE2E2ADC2D6789E40006B305 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CE2E2ADE2D6789F00006B305 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 1; path = StorageManager.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
-		CE2E2AE62D678B980006B305 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CE2E2B002D67960B0006B305 /* APITasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITasks.swift; sourceTree = "<group>"; };
 		CE2E2B022D67A96E0006B305 /* TaskListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListInteractor.swift; sourceTree = "<group>"; };
 		CE2E2B042D67A9DC0006B305 /* TaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListPresenter.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				CE2E2ADE2D6789F00006B305 /* StorageManager.swift */,
-				CE2E2AC82D6786720006B305 /* TasksList.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -279,7 +276,7 @@
 		CE2E2AE42D678A340006B305 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				CE2E2AE62D678B980006B305 /* Task.swift */,
+				CE2E2AC82D6786720006B305 /* TasksList.xcdatamodeld */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -529,7 +526,6 @@
 			files = (
 				CE7C061E2D68CD4300B5427A /* DetailViewRouter.swift in Sources */,
 				CE7C06182D68CA2200B5427A /* DetailViewController.swift in Sources */,
-				CE2E2AE72D678BB00006B305 /* Task.swift in Sources */,
 				CE9B56FB2D6A180D00977D93 /* LabelStyles.swift in Sources */,
 				CE2E2B052D67A9DC0006B305 /* TaskListPresenter.swift in Sources */,
 				CE8A619F2D6CE9A600077BD8 /* LaunchScreenPresenter.swift in Sources */,

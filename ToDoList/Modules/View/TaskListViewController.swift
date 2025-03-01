@@ -4,6 +4,8 @@ import UIKit
 
 protocol TaskListViewProtocol: AnyObject {
     func showTasks(tasks: [TasksList])
+    func showError(_ message: String)
+    func showSuccess()
 }
 
 final class TaskListViewController: UITableViewController, TaskListViewProtocol {
@@ -17,13 +19,33 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
         return view
     }()
 
+    private let segmentedController: UISegmentedControl = {
+        let items = ["Все задачи", "Выполненные", "Невыполненные"]
+        let view = UISegmentedControl(items: items)
+        view.selectedSegmentIndex = 0
+        view.selectedSegmentTintColor = .systemGray
+        view.backgroundColor = .selectedView
+
+        view.setTitleTextAttributes(
+            [.foregroundColor: UIColor.white,
+             .font: UIFont.systemFont(ofSize: 14)],
+            for: .selected )
+
+        view.setTitleTextAttributes(
+            [.foregroundColor: UIColor.white,
+             .font: UIFont.systemFont(ofSize: 12)],
+            for: .normal)
+
+        return view
+    }()
+
         //MARK: Properties
     var presenter: TaskListPresenterProtocol?
-    var tasks: [TasksList] = []
 
         //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         setupUI()
     }
 
@@ -34,9 +56,20 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
 
         //MARK: - Methods
     func showTasks(tasks: [TasksList]) {
-        self.tasks = tasks
         tableView.reloadData()
         updateToolBarItems()
+    }
+
+    func showError(_ message: String) {
+        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
+    func showSuccess() {
+        let alert = UIAlertController(title: "Выполнено", message: "Задача выполнена", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -44,7 +77,7 @@ final class TaskListViewController: UITableViewController, TaskListViewProtocol 
 extension TaskListViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tasks.count
+        presenter?.tasks.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,9 +86,11 @@ extension TaskListViewController {
             withIdentifier: TaskListsCell.identifer,
             for: indexPath) as? TaskListsCell else { return UITableViewCell() }
 
-        let task = tasks[indexPath.row]
-        cell.presenter = presenter
+        let task = presenter?.tasks[indexPath.row] ?? TasksList()
         cell.setupCell(with: task)
+        cell.completionToggleHandler = { [weak self] in
+            self?.presenter?.isCompleted(task: task)
+        }
 
         let backgroundView = UIView()
         backgroundView.backgroundColor = UIColor.selectedView
@@ -70,7 +105,7 @@ extension TaskListViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let task = tasks[indexPath.row]
+        let task = presenter?.tasks[indexPath.row] ?? TasksList()
         presenter?.showTasksDetail(for: task)
     }
 
@@ -80,7 +115,7 @@ extension TaskListViewController {
         point: CGPoint
     ) -> UIContextMenuConfiguration? {
 
-        let task = tasks[indexPath.row]
+        let task = presenter?.tasks[indexPath.row] ?? TasksList()
 
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
@@ -104,10 +139,10 @@ extension TaskListViewController {
                     image: UIImage(systemName: "trash"),
                     attributes: .destructive) { [weak self] _ in
                         guard let self else { return }
-                        let deleteTask = tasks.remove(at: indexPath.row)
-                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                        let task = presenter?.tasks[indexPath.row]
+                        presenter?.deleteTask(task: task ?? TasksList())
                         updateToolBarItems()
-                        presenter?.deleteTask(task: deleteTask)
+                        tableView.reloadData()
                     }
 
                 return UIMenu(children: [editAction, deleteAction])
@@ -125,9 +160,11 @@ private extension TaskListViewController {
         setupNavigationController()
         setupNavigationToolBar()
         setupSearchController()
+        setupSegmented()
+        setupTableView()
+    }
 
-        presenter?.viewDidLoad()
-
+    func setupTableView() {
         tableView.backgroundColor = .darkBackground
         tableView.separatorColor = UIColor.gray
         tableView.estimatedRowHeight = UITableView.automaticDimension
@@ -139,11 +176,38 @@ private extension TaskListViewController {
         tableView.register(TaskListsCell.self, forCellReuseIdentifier: TaskListsCell.identifer)
     }
 
-        //MARK: - Navigation Controller
+    func setupSegmented() {
+        segmentedController.addTarget(self, action: #selector(segmentValueChanged), for: .valueChanged)
+    }
+
+    func updateToolBarItems() {
+        guard let items = toolbarItems else { return }
+
+        items.forEach { item in
+            if let label = item.customView as? UILabel {
+                label.text = "\(presenter?.tasks.count ?? 0) Задач"
+            }
+        }
+    }
+
+        //MARK: - Actions
+    @objc private func tapAddButton() {
+        presenter?.showAddTaskScreen()
+    }
+
+    @objc private func segmentValueChanged(sender: UISegmentedControl) {
+        presenter?.didSelectSegment(at: sender.selectedSegmentIndex)
+    }
+}
+
+    //MARK: - Navigation Controller
+extension TaskListViewController {
+
     func setupNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .white
         navigationItem.title = "Задачи"
+        navigationItem.titleView = segmentedController
 
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -190,7 +254,7 @@ private extension TaskListViewController {
         let taskCountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 20))
         taskCountLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
         taskCountLabel.textAlignment = .center
-        taskCountLabel.text = "\(tasks.count) Задач"
+        taskCountLabel.text = "\(presenter?.tasks.count ?? 0) Задач"
         taskCountLabel.textColor = .white
 
         let addTaskButton = UIButton(type: .system)
@@ -209,21 +273,6 @@ private extension TaskListViewController {
         let flexibleSpace = UIBarButtonItem(systemItem: .flexibleSpace)
 
         toolbarItems = [flexibleSpace, countLabel, flexibleSpace, addButton]
-    }
-
-        //MARK: Actions
-    @objc private func tapAddButton() {
-        presenter?.showAddTaskScreen()
-    }
-
-    func updateToolBarItems() {
-        guard let items = toolbarItems else { return }
-
-        items.forEach { item in
-            if let label = item.customView as? UILabel {
-                label.text = "\(tasks.count) Задач"
-            }
-        }
     }
 }
 
