@@ -26,7 +26,7 @@ final class DetailViewInteractor: DetailViewInteractorProtocol {
     var storageManager: StorageManagerProtocol = StorageManager.shared
 
         //MARK: - Private Properties
-    private var currentTask: TasksList?
+    var currentTask: TasksList?
 
         //MARK: - Fetch Methods
     func fetchTasksDetails(task: TasksList) {

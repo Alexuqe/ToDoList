@@ -48,6 +48,23 @@
 		CE8A61C12D6D186000077BD8 /* Add Task Screen.png in Resources */ = {isa = PBXBuildFile; fileRef = CE8A61B42D6D186000077BD8 /* Add Task Screen.png */; };
 		CE9B56F22D6A12A200977D93 /* TaskContextPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */; };
 		CE9B56FB2D6A180D00977D93 /* LabelStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B56FA2D6A180300977D93 /* LabelStyles.swift */; };
+		CEB1EBB42D738B1800A47ADC /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBB32D738B0C00A47ADC /* NetworkManagerTests.swift */; };
+		CEB1EBB72D738E9300A47ADC /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBB62D738E8800A47ADC /* MockNetworkManager.swift */; };
+		CEB1EBB92D738E9F00A47ADC /* MockTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBB82D738E9B00A47ADC /* MockTaskListView.swift */; };
+		CEB1EBBB2D738EAD00A47ADC /* MockStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBBA2D738EA800A47ADC /* MockStorageManager.swift */; };
+		CEB1EBBD2D738F5B00A47ADC /* MockTaskListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBBC2D738F5900A47ADC /* MockTaskListPresenter.swift */; };
+		CEB1EBC12D738FA600A47ADC /* MockTaskListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBC02D738F8400A47ADC /* MockTaskListRouter.swift */; };
+		CEB1EBC32D7390D500A47ADC /* MockTaskListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBC22D7390D300A47ADC /* MockTaskListInteractor.swift */; };
+		CEB1EBC82D73932800A47ADC /* MockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBC72D73932200A47ADC /* MockDetailViewController.swift */; };
+		CEB1EBCA2D73933100A47ADC /* MockDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBC92D73932B00A47ADC /* MockDetailViewPresenter.swift */; };
+		CEB1EBCC2D73933C00A47ADC /* MockDetailViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBCB2D73933B00A47ADC /* MockDetailViewRouter.swift */; };
+		CEB1EBCE2D73935500A47ADC /* MockDetailViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBCD2D73935400A47ADC /* MockDetailViewInteractor.swift */; };
+		CEB1EBD12D73941300A47ADC /* MockLaunchScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBD02D73940E00A47ADC /* MockLaunchScreenPresenter.swift */; };
+		CEB1EBD52D73945A00A47ADC /* LaunchScreenViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBD42D73945800A47ADC /* LaunchScreenViewControllerTests.swift */; };
+		CEB1EBD72D73947E00A47ADC /* LaunchScreenRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBD62D73947400A47ADC /* LaunchScreenRouterTests.swift */; };
+		CEB1EBD92D7394B300A47ADC /* LaunchScreenPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBD82D7394B100A47ADC /* LaunchScreenPresenterTests.swift */; };
+		CEB1EBDB2D7394D600A47ADC /* MockLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBDA2D7394D500A47ADC /* MockLaunchScreenViewController.swift */; };
+		CEB1EBDD2D7394E500A47ADC /* MockLaunchScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1EBDC2D7394E300A47ADC /* MockLaunchScreenRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +131,23 @@
 		CE8A61BA2D6D186000077BD8 /* Search Task.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search Task.png"; sourceTree = "<group>"; };
 		CE9B56F12D6A12A200977D93 /* TaskContextPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskContextPreview.swift; sourceTree = "<group>"; };
 		CE9B56FA2D6A180300977D93 /* LabelStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStyles.swift; sourceTree = "<group>"; };
+		CEB1EBB32D738B0C00A47ADC /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		CEB1EBB62D738E8800A47ADC /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
+		CEB1EBB82D738E9B00A47ADC /* MockTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskListView.swift; sourceTree = "<group>"; };
+		CEB1EBBA2D738EA800A47ADC /* MockStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStorageManager.swift; sourceTree = "<group>"; };
+		CEB1EBBC2D738F5900A47ADC /* MockTaskListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskListPresenter.swift; sourceTree = "<group>"; };
+		CEB1EBC02D738F8400A47ADC /* MockTaskListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskListRouter.swift; sourceTree = "<group>"; };
+		CEB1EBC22D7390D300A47ADC /* MockTaskListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTaskListInteractor.swift; sourceTree = "<group>"; };
+		CEB1EBC72D73932200A47ADC /* MockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewController.swift; sourceTree = "<group>"; };
+		CEB1EBC92D73932B00A47ADC /* MockDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewPresenter.swift; sourceTree = "<group>"; };
+		CEB1EBCB2D73933B00A47ADC /* MockDetailViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewRouter.swift; sourceTree = "<group>"; };
+		CEB1EBCD2D73935400A47ADC /* MockDetailViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewInteractor.swift; sourceTree = "<group>"; };
+		CEB1EBD02D73940E00A47ADC /* MockLaunchScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLaunchScreenPresenter.swift; sourceTree = "<group>"; };
+		CEB1EBD42D73945800A47ADC /* LaunchScreenViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewControllerTests.swift; sourceTree = "<group>"; };
+		CEB1EBD62D73947400A47ADC /* LaunchScreenRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenRouterTests.swift; sourceTree = "<group>"; };
+		CEB1EBD82D7394B100A47ADC /* LaunchScreenPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenPresenterTests.swift; sourceTree = "<group>"; };
+		CEB1EBDA2D7394D500A47ADC /* MockLaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLaunchScreenViewController.swift; sourceTree = "<group>"; };
+		CEB1EBDC2D7394E300A47ADC /* MockLaunchScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLaunchScreenRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,18 +336,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		CE4A79342D736AD800065FD0 /* StorageManagerTests */ = {
+		CE4A79342D736AD800065FD0 /* DataTests */ = {
 			isa = PBXGroup;
 			children = (
 				CE4A79352D736AE700065FD0 /* StorageManagerTests.swift */,
+				CEB1EBB32D738B0C00A47ADC /* NetworkManagerTests.swift */,
 			);
-			path = StorageManagerTests;
+			path = DataTests;
 			sourceTree = "<group>";
 		};
 		CE5449172D6B4A9C001914C4 /* ToDoListTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE4A79342D736AD800065FD0 /* StorageManagerTests */,
+				CEB1EBB52D738E7500A47ADC /* MockClasses */,
+				CE4A79342D736AD800065FD0 /* DataTests */,
 				CE5449272D6B4FEB001914C4 /* ViewsTests */,
 				CE5449242D6B4F77001914C4 /* InteractorTests */,
 				CE5449252D6B4F84001914C4 /* PresenterTests */,
@@ -344,6 +380,7 @@
 		CE5449252D6B4F84001914C4 /* PresenterTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEB1EBD82D7394B100A47ADC /* LaunchScreenPresenterTests.swift */,
 				CE54492A2D6B5086001914C4 /* TaskLIstPresenterTests.swift */,
 				CE54492B2D6B5099001914C4 /* DetailViewPresenterTests.swift */,
 			);
@@ -353,6 +390,7 @@
 		CE5449262D6B4F98001914C4 /* RouterTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEB1EBD62D73947400A47ADC /* LaunchScreenRouterTests.swift */,
 				CE54492E2D6B51AA001914C4 /* TaskListViewRouterTests.swift */,
 				CE54492F2D6B51C0001914C4 /* DetailViewRouterTests.swift */,
 			);
@@ -362,6 +400,7 @@
 		CE5449272D6B4FEB001914C4 /* ViewsTests */ = {
 			isa = PBXGroup;
 			children = (
+				CEB1EBD42D73945800A47ADC /* LaunchScreenViewControllerTests.swift */,
 				CE5449282D6B5003001914C4 /* TaskListViewTests.swift */,
 				CE5449292D6B5029001914C4 /* DetailViewTests.swift */,
 			);
@@ -391,6 +430,58 @@
 				CE9B56FA2D6A180300977D93 /* LabelStyles.swift */,
 			);
 			path = TextStyles;
+			sourceTree = "<group>";
+		};
+		CEB1EBB52D738E7500A47ADC /* MockClasses */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1EBCF2D7393E700A47ADC /* MockLaunchScreen */,
+				CEB1EBC42D7392A500A47ADC /* MockDate */,
+				CEB1EBC62D73930900A47ADC /* MockDetailView */,
+				CEB1EBC52D7392B500A47ADC /* MockTaskList */,
+			);
+			path = MockClasses;
+			sourceTree = "<group>";
+		};
+		CEB1EBC42D7392A500A47ADC /* MockDate */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1EBB62D738E8800A47ADC /* MockNetworkManager.swift */,
+				CEB1EBBA2D738EA800A47ADC /* MockStorageManager.swift */,
+			);
+			path = MockDate;
+			sourceTree = "<group>";
+		};
+		CEB1EBC52D7392B500A47ADC /* MockTaskList */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1EBB82D738E9B00A47ADC /* MockTaskListView.swift */,
+				CEB1EBC22D7390D300A47ADC /* MockTaskListInteractor.swift */,
+				CEB1EBBC2D738F5900A47ADC /* MockTaskListPresenter.swift */,
+				CEB1EBC02D738F8400A47ADC /* MockTaskListRouter.swift */,
+			);
+			path = MockTaskList;
+			sourceTree = "<group>";
+		};
+		CEB1EBC62D73930900A47ADC /* MockDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1EBC72D73932200A47ADC /* MockDetailViewController.swift */,
+				CEB1EBC92D73932B00A47ADC /* MockDetailViewPresenter.swift */,
+				CEB1EBCB2D73933B00A47ADC /* MockDetailViewRouter.swift */,
+				CEB1EBCD2D73935400A47ADC /* MockDetailViewInteractor.swift */,
+			);
+			path = MockDetailView;
+			sourceTree = "<group>";
+		};
+		CEB1EBCF2D7393E700A47ADC /* MockLaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CEB1EBD02D73940E00A47ADC /* MockLaunchScreenPresenter.swift */,
+				CEB1EBDA2D7394D500A47ADC /* MockLaunchScreenViewController.swift */,
+				CEB1EBDC2D7394E300A47ADC /* MockLaunchScreenRouter.swift */,
+			);
+			path = MockLaunchScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,15 +655,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEB1EBCE2D73935500A47ADC /* MockDetailViewInteractor.swift in Sources */,
+				CEB1EBB42D738B1800A47ADC /* NetworkManagerTests.swift in Sources */,
 				CE8A61972D6CE25F00077BD8 /* TaskListViewRouterTests.swift in Sources */,
 				CE5449302D6B52BE001914C4 /* TaskListViewTests.swift in Sources */,
+				CEB1EBBD2D738F5B00A47ADC /* MockTaskListPresenter.swift in Sources */,
+				CEB1EBD52D73945A00A47ADC /* LaunchScreenViewControllerTests.swift in Sources */,
 				CE5449312D6B52BE001914C4 /* DetailViewTests.swift in Sources */,
+				CEB1EBC12D738FA600A47ADC /* MockTaskListRouter.swift in Sources */,
+				CEB1EBB72D738E9300A47ADC /* MockNetworkManager.swift in Sources */,
+				CEB1EBDD2D7394E500A47ADC /* MockLaunchScreenRouter.swift in Sources */,
+				CEB1EBB92D738E9F00A47ADC /* MockTaskListView.swift in Sources */,
 				CE5449332D6B52BE001914C4 /* DetailViewRouterTests.swift in Sources */,
+				CEB1EBBB2D738EAD00A47ADC /* MockStorageManager.swift in Sources */,
 				CE5449342D6B52BE001914C4 /* TaskLIstPresenterTests.swift in Sources */,
+				CEB1EBC32D7390D500A47ADC /* MockTaskListInteractor.swift in Sources */,
+				CEB1EBD12D73941300A47ADC /* MockLaunchScreenPresenter.swift in Sources */,
+				CEB1EBCA2D73933100A47ADC /* MockDetailViewPresenter.swift in Sources */,
 				CE5449352D6B52BE001914C4 /* DetailViewPresenterTests.swift in Sources */,
 				CE4A79362D736AED00065FD0 /* StorageManagerTests.swift in Sources */,
+				CEB1EBD92D7394B300A47ADC /* LaunchScreenPresenterTests.swift in Sources */,
+				CEB1EBDB2D7394D600A47ADC /* MockLaunchScreenViewController.swift in Sources */,
+				CEB1EBD72D73947E00A47ADC /* LaunchScreenRouterTests.swift in Sources */,
 				CE5449362D6B52BE001914C4 /* TaskLIstInteractorTests.swift in Sources */,
 				CE5449372D6B52BE001914C4 /* DetailViewInteractorTests.swift in Sources */,
+				CEB1EBC82D73932800A47ADC /* MockDetailViewController.swift in Sources */,
+				CEB1EBCC2D73933C00A47ADC /* MockDetailViewRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

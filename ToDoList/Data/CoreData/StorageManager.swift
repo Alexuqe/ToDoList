@@ -16,7 +16,6 @@ protocol StorageManagerProtocol {
 }
 
 
-
 final class StorageManager: StorageManagerProtocol {
 
         //MARK: - Properties
