@@ -141,8 +141,6 @@ final class TaskListsCell: UITableViewCell {
 
     //MARK: - Action
     @objc private func checkoutButtonTapped() {
-//        guard let taskList = taskList else { return }
-//        presenter?.isCompleted(task: taskList)
         completionToggleHandler?()
     }
 }

@@ -24,7 +24,6 @@ protocol TaskListPresenterProtocol: AnyObject {
 }
 
 
-
 final class TaskListPresenter: TaskListPresenterProtocol {
 
     //MARK: Properties
@@ -41,7 +40,7 @@ final class TaskListPresenter: TaskListPresenterProtocol {
 
     //MARK: - Task Methods
     func viewDidLoad() {
-        interactor?.fetchTaskForCurrentSegment()
+        interactor?.fetchTask()
     }
     
     func addTask(title: String, details: String) {
@@ -85,8 +84,6 @@ final class TaskListPresenter: TaskListPresenterProtocol {
             self?.viewDidLoad()
         }
     }
-
-
 }
 
 //MARK: - TaskListInteractorOutputProtocol

@@ -71,7 +71,7 @@ final class StorageManager: StorageManagerProtocol {
             do {
                 let tasks = try self.backgroundViewContext.fetch(fetchRequest)
                 DispatchQueue.main.async {
-                    completion(.success(tasks))
+                completion(.success(tasks))
                 }
             } catch {
                 DispatchQueue.main.async {

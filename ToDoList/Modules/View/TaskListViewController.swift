@@ -109,46 +109,56 @@ extension TaskListViewController {
         presenter?.showTasksDetail(for: task)
     }
 
-    override func tableView(
-        _ tableView: UITableView,
-        contextMenuConfigurationForRowAt indexPath: IndexPath,
-        point: CGPoint
-    ) -> UIContextMenuConfiguration? {
+    override func tableView(_ tableView: UITableView,
+                            contextMenuConfigurationForRowAt indexPath: IndexPath,
+                            point: CGPoint) -> UIContextMenuConfiguration? {
 
         let task = presenter?.tasks[indexPath.row] ?? TasksList()
 
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: { [weak self] in
+
                 var perview: UIViewController?
                 self?.presenter?.showDetailPreview(with: task) { controller in
                     perview = controller
                 }
                 return perview
-            }) { _ in
 
-                let editAction = UIAction(
-                    title: "Редактировать",
-                    image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
-                        guard let self else { return }
-                        presenter?.showTasksDetail(for: task)
-                    }
-
-                let deleteAction = UIAction(
-                    title: "Удалить",
-                    image: UIImage(systemName: "trash"),
-                    attributes: .destructive) { [weak self] _ in
-                        guard let self else { return }
-                        let task = presenter?.tasks[indexPath.row]
-                        presenter?.deleteTask(task: task ?? TasksList())
-                        updateToolBarItems()
-                        tableView.reloadData()
-                    }
+            }) { [weak self] _ in
+                guard let self else { return nil }
+                
+                let editAction = editAction(task: task)
+                let deleteAction = deleteAction(tasks: task)
 
                 return UIMenu(children: [editAction, deleteAction])
             }
 
         return configuration
+    }
+
+    private func editAction(task: TasksList) -> UIAction {
+        let editAction = UIAction(
+            title: "Редактировать",
+            image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+                guard let self else { return }
+                presenter?.showTasksDetail(for: task)
+            }
+        return editAction
+    }
+
+    private func deleteAction(tasks: TasksList) -> UIAction {
+        let deleteAction = UIAction(
+            title: "Удалить",
+            image: UIImage(systemName: "trash"),
+            attributes: .destructive) { [weak self] _ in
+                guard let self else { return }
+                let task = tasks
+                presenter?.deleteTask(task: task)
+                updateToolBarItems()
+                tableView.reloadData()
+            }
+        return deleteAction
     }
 }
 

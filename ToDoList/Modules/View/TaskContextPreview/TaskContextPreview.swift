@@ -2,11 +2,11 @@
 
 import UIKit
 
-protocol TaskContestMenuProtocol: AnyObject {
+protocol TaskContextMenuProtocol: AnyObject {
     func configure(with task: TasksList)
 }
 
-final class TaskContextPreview: UIViewController, TaskContestMenuProtocol {
+final class TaskContextPreview: UIViewController, TaskContextMenuProtocol {
 
         //MARK: Properties
     var tasks: TasksList?

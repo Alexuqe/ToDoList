@@ -38,26 +38,32 @@ final class TaskListInteractor: TaskListInteractorProtocol {
         //MARK: - Fetch Methods
     func fetchTask() {
         if !UserDefaults.standard.bool(forKey: userDefaultsKey) {
+            print("Loading from API")
             loadTaskFromAPI()
         } else {
+            print("Loading from CoreData")
             loadTaskFromCoreData()
         }
     }
 
     func loadTaskFromAPI() {
-        guard let url = URL(string: "https://dummyjson.com/todos") else { return }
-
+        guard let url = URL(string: "https://dummyjson.com/todos") else {
+            presenter?.didReceiveError(NetworkError.invalidUrl)
+            return
+        }
         networkManager.fetch(APITasks.self, url: url) { [weak self] result in
             guard let self else { return }
 
             switch result {
                 case .success(let tasks):
+                    print("API Success: \(tasks.todos.count) tasks received")
                     self.storageManager.fetchTasksOnAPI(tasks.todos, savedNames.taskTitles) {
+                        print("Tasks saved to CoreData")
                         UserDefaults.standard.set(true, forKey: self.userDefaultsKey)
                         self.loadTaskFromCoreData()
                     }
                 case .failure(let error):
-                    print(error)
+                    self.presenter?.didReceiveError(error)
             }
         }
     }

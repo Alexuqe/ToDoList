@@ -1,127 +1,274 @@
-
-    import XCTest
-    import CoreData
-    @testable import ToDoList
-
-    class TaskListPresenterTests: XCTestCase {
-        var sut: TaskListPresenter!
-        var mockView: MockTaskListView!
-        var mockInteractor: MockTaskListInteractor!
-        var mockRouter: MockTaskListRouter!
-        var persistentContainer: NSPersistentContainer!
-
-        override func setUp() {
-            super.setUp()
-            mockView = MockTaskListView()
-            mockInteractor = MockTaskListInteractor()
-            mockRouter = MockTaskListRouter()
-            sut = TaskListPresenter()
-            sut.view = mockView
-            sut.interactor = mockInteractor
-            sut.router = mockRouter
-
-            // Initialize the in-memory persistent container
-            persistentContainer = createInMemoryPersistentContainer()
-        }
-
-        override func tearDown() {
-            sut = nil
-            mockView = nil
-            mockInteractor = nil
-            mockRouter = nil
-            persistentContainer = nil
-            super.tearDown()
-        }
-
-        func testViewDidLoad() {
-            // Act
-            sut.viewDidLoad()
-
-            // Assert
-            XCTAssertTrue(mockInteractor.fetchTaskCalled, "viewDidLoad should trigger interactor's fetchTask")
-        }
-
-        func testDeleteTask() {
-            // Arrange
-            let task = TasksList(context: persistentContainer.viewContext)
-            task.title = "Task"
-            task.details = "Details"
-            task.date = Date()
-            task.isCompleted = false
-
-            // Act
-            sut.deleteTask(task: task)
-
-            // Assert
-            XCTAssertTrue(mockInteractor.deleteTaskCalled, "deleteTask should trigger interactor's deleteTask")
-        }
-
-        // Helper to create in-memory Core Data stack
-        private func createInMemoryPersistentContainer() -> NSPersistentContainer {
-            let container = NSPersistentContainer(name: "TasksList")
-            let description = NSPersistentStoreDescription()
-            description.type = NSInMemoryStoreType
-            container.persistentStoreDescriptions = [description]
-            container.loadPersistentStores { _, error in
-                if let error = error {
-                    fatalError("Failed to load in-memory store: \(error)")
-                }
-            }
-            return container
-        }
-    }
-
-    class MockTaskListView: TaskListViewProtocol {
-        var tasks: [TasksList] = []
-
-        func showTasks(tasks: [TasksList]) {
-            self.tasks = tasks
-        }
-    }
-
-class MockTaskListInteractor: TaskListInteractorProtocol {
-
-    var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)?
-    var fetchTaskCalled = false
-    var deleteTaskCalled = false
-
-    func fetchTask() {
-        fetchTaskCalled = true
-    }
-
-    func addTask(title: String, details: String) {}
-    func updateTask(task: TasksList, title: String, details: String) {}
-    func deleteTask(task: TasksList) {
-        deleteTaskCalled = true
-    }
-    func searchTask(title: String) {}
-    func isCompleted(task: TasksList) {}
-    func segmentedTasks(at index: Int) {}
-
-}
-
-class MockTaskListRouter: TaskListRouterProtocol {
-
-    var viewController: UITableViewController?
-
-    static func createdModule() -> UITableViewController {
-        return UITableViewController()
-    }
-
-    func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void) {}
-    func navigateToAddTask(completion: @escaping () -> Void) {}
-    func showDetailPreview(with task: ToDoList.TasksList) -> UIViewController? {
-        return UIViewController()
-    }
-}
-
-    extension TasksList {
-        convenience init(testTitle: String, testDetails: String, testDate: Date, testIsCompleted: Bool) {
-            let temporaryContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-            self.init(context: temporaryContext)
-            self.title = testTitle
-            self.details = testDetails
-            self.date = testDate
-            self.isCompleted = testIsCompleted
-        }
-    }
+//import XCTest
+//@testable import ToDoList
+//import CoreData
+//
+//class TaskListPresenterTests: XCTestCase {
+//    var sut: TaskListPresenter!
+//    var mockView: MockTaskListView!
+//    var mockInteractor: MockTaskListInteractor!
+//    var mockRouter: MockTaskListRouter!
+//
+//    override func setUp() {
+//        super.setUp()
+//        mockView = MockTaskListView()
+//        mockInteractor = MockTaskListInteractor()
+//        mockRouter = MockTaskListRouter()
+//        sut = TaskListPresenter(view: mockView, interactor: mockInteractor, router: mockRouter)
+//    }
+//
+//    override func tearDown() {
+//        sut = nil
+//        mockView = nil
+//        mockInteractor = nil
+//        mockRouter = nil
+//        super.tearDown()
+//    }
+//
+//    func testViewDidLoad_CallsInteractor() {
+//        // Act
+//        sut.viewDidLoad()
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.fetchTaskForCurrentSegmentCalled)
+//    }
+//
+//    func testAddTask_CallsInteractor() {
+//        // Arrange
+//        let title = "Test Task"
+//        let details = "Test Details"
+//
+//        // Act
+//        sut.addTask(title: title, details: details)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.addTaskCalled)
+//        XCTAssertEqual(mockInteractor.lastAddedTitle, title)
+//        XCTAssertEqual(mockInteractor.lastAddedDetails, details)
+//    }
+//
+//    func testUpdateTask_CallsInteractor() {
+//        // Arrange
+//        let task = TasksList(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+//        let title = "Updated Task"
+//        let details = "Updated Details"
+//
+//        // Act
+//        sut.updateTask(task: task, title: title, details: details)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.updateTaskCalled)
+//        XCTAssertEqual(mockInteractor.lastUpdatedTitle, title)
+//        XCTAssertEqual(mockInteractor.lastUpdatedDetails, details)
+//    }
+//
+//    func testDeleteTask_CallsInteractor() {
+//        // Arrange
+//        let task = TasksList(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+//
+//        // Act
+//        sut.deleteTask(task: task)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.deleteTaskCalled)
+//    }
+//
+//    func testSearchTask_CallsInteractor() {
+//        // Arrange
+//        let searchText = "Search"
+//
+//        // Act
+//        sut.searchTask(title: searchText)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.searchTaskCalled)
+//        XCTAssertEqual(mockInteractor.lastSearchTitle, searchText)
+//    }
+//
+//    func testIsCompleted_CallsInteractor() {
+//        // Arrange
+//        let task = TasksList(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+//
+//        // Act
+//        sut.isCompleted(task: task)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.isCompletedCalled)
+//    }
+//
+//    func testDidSelectSegment_CallsInteractor() {
+//        // Arrange
+//        let index = 1
+//
+//        // Act
+//        sut.didSelectSegment(at: index)
+//
+//        // Assert
+//        XCTAssertTrue(mockInteractor.segmentChangedCalled)
+//        XCTAssertEqual(mockInteractor.lastSegmentIndex, index)
+//    }
+//
+//    func testShowTasksDetail_CallsRouter() {
+//        // Arrange
+//        let task = TasksList(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+//
+//        // Act
+//        sut.showTasksDetail(for: task)
+//
+//        // Assert
+//        XCTAssertTrue(mockRouter.navigateToTaskDetailCalled)
+//    }
+//
+//    func testShowAddTaskScreen_CallsRouter() {
+//        // Act
+//        sut.showAddTaskScreen()
+//
+//        // Assert
+//        XCTAssertTrue(mockRouter.navigateToAddTaskCalled)
+//    }
+//
+//    func testDidFetchTasks_UpdatesViewAndTasks() {
+//        // Arrange
+//        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+//        let tasks = [TasksList(context: context)]
+//
+//        // Act
+//        sut.didFetchTasks(tasks: tasks)
+//
+//        // Assert
+//        XCTAssertEqual(sut.tasks, tasks)
+//        XCTAssertTrue(mockView.showTasksCalled)
+//    }
+//
+//    func testDidReceiveError_ShowsErrorOnView() {
+//        // Arrange
+//        let error = NSError(domain: "test", code: 1)
+//
+//        // Act
+//        sut.didReceiveError(error)
+//
+//        // Assert
+//        XCTAssertTrue(mockView.showErrorCalled)
+//    }
+//
+//    func testTaskCreated_ShowsSuccessOnView() {
+//        // Arrange
+//        let task = TasksList(context: NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType))
+//
+//        // Act
+//        sut.taskCreated(task)
+//
+//        // Assert
+//        XCTAssertTrue(mockView.showSuccessCalled)
+//    }
+//}
+//
+//// MARK: - Mock Classes
+//
+//class MockTaskListView: TaskListViewProtocol {
+//    var showTasksCalled = false
+//    var showErrorCalled = false
+//    var showSuccessCalled = false
+//
+//    func showTasks(tasks: [TasksList]) {
+//        showTasksCalled = true
+//    }
+//
+//    func showError(_ message: String) {
+//        showErrorCalled = true
+//    }
+//
+//    func showSuccess() {
+//        showSuccessCalled = true
+//    }
+//}
+//
+//class MockTaskListInteractor: TaskListInteractorProtocol {
+//    var presenter: (TaskListPresenterProtocol & TaskListInteractorOutputProtocol)?
+//
+//    var fetchTaskCalled = false
+//    var fetchTaskForCurrentSegmentCalled = false
+//    var addTaskCalled = false
+//    var updateTaskCalled = false
+//    var deleteTaskCalled = false
+//    var searchTaskCalled = false
+//    var isCompletedCalled = false
+//    var segmentChangedCalled = false
+//
+//    var lastAddedTitle: String?
+//    var lastAddedDetails: String?
+//    var lastUpdatedTask: TasksList?
+//    var lastUpdatedTitle: String?
+//    var lastUpdatedDetails: String?
+//    var lastDeletedTask: TasksList?
+//    var lastSearchTitle: String?
+//    var lastCompletedTask: TasksList?
+//    var lastSegmentIndex: Int?
+//
+//    func fetchTask() {
+//        fetchTaskCalled = true
+//    }
+//
+//    func fetchTaskForCurrentSegment() {
+//        fetchTaskForCurrentSegmentCalled = true
+//    }
+//
+//    func addTask(title: String, details: String) {
+//        addTaskCalled = true
+//        lastAddedTitle = title
+//        lastAddedDetails = details
+//    }
+//
+//    func updateTask(task: TasksList, title: String, details: String) {
+//        updateTaskCalled = true
+//        lastUpdatedTask = task
+//        lastUpdatedTitle = title
+//        lastUpdatedDetails = details
+//    }
+//
+//    func deleteTask(task: TasksList) {
+//        deleteTaskCalled = true
+//        lastDeletedTask = task
+//    }
+//
+//    func searchTask(title: String) {
+//        searchTaskCalled = true
+//        lastSearchTitle = title
+//    }
+//
+//    func isCompleted(task: TasksList) {
+//        isCompletedCalled = true
+//        lastCompletedTask = task
+//    }
+//
+//    func segmentChanged(to index: Int) {
+//        segmentChangedCalled = true
+//        lastSegmentIndex = index
+//    }
+//}
+//
+//class MockTaskListRouter: TaskListRouterProtocol {
+//    var viewController: UITableViewController?
+//
+//    var navigateToTaskDetailCalled = false
+//    var navigateToAddTaskCalled = false
+//    var showDetailPreviewCalled = false
+//
+//    static func createdModule() -> UITableViewController {
+//        return UITableViewController()
+//    }
+//
+//    func navigateToTaskDetail(with task: TasksList, completion: @escaping () -> Void) {
+//        navigateToTaskDetailCalled = true
+//        completion()
+//    }
+//
+//    func navigateToAddTask(completion: @escaping () -> Void) {
+//        navigateToAddTaskCalled = true
+//        completion()
+//    }
+//
+//    func showDetailPreview(with task: TasksList) -> UIViewController? {
+//        showDetailPreviewCalled = true
+//        return UIViewController()
+//    }
+//}

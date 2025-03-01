@@ -1,7 +1,6 @@
 
 
 import UIKit
-import UIKit
 
 protocol TaskListRouterProtocol: AnyObject {
     var viewController: UITableViewController? { get set }
@@ -11,6 +10,7 @@ protocol TaskListRouterProtocol: AnyObject {
     func navigateToAddTask(completion: @escaping () -> Void)
     func showDetailPreview(with task: TasksList) -> UIViewController?
 }
+
 
 final class TaskListRouter: TaskListRouterProtocol {
 
